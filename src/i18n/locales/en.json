@@ -1,0 +1,941 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "overview": "Overview",
+    "analytics": "Analytics",
+    "identity": "Identity & Permissions",
+    "users": "Users",
+    "supervisors": "Supervisors",
+    "roles": "Roles",
+    "permissions": "Permissions Matrix",
+    "product": "Product",
+    "sleepFiles": "Sleep Profiles",
+    "sleepLogs": "Sleep Logs",
+    "naps": "Naps",
+    "sleepDebt": "Sleep Debt",
+    "healthSources": "Input Methods",
+    "syncLogs": "Sync Logs",
+    "reminders": "Reminders",
+    "customNotifications": "Custom notifications",
+    "notifications": "Notifications",
+    "finance": "Finance & Content",
+    "plans": "Plans",
+    "subscriptions": "Subscriptions",
+    "payments": "Payments",
+    "content": "Content",
+    "settings": "Settings",
+    "supportSection": "Support & Compliance",
+    "support": "Support",
+    "auditLog": "Audit Log"
+  },
+  "common": {
+    "appName": "Sobat",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "email": "Email",
+    "password": "Password",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "loading": "Loading…",
+    "error": "An error occurred",
+    "noData": "No data",
+    "details": "Details",
+    "viewAll": "View all",
+    "name": "Name",
+    "status": "Status",
+    "registeredAt": "Registered",
+    "actions": "Actions",
+    "confirm": "Confirm",
+    "language": "Language",
+    "arabic": "عربي",
+    "english": "English",
+    "englishLabel": "ENGLISH",
+    "pageTitle": "Admin Dashboard",
+    "unauthorized": "Unauthorized",
+    "retry": "Retry",
+    "yes": "Yes",
+    "no": "No",
+    "view": "View",
+    "phone": "Phone"
+  },
+  "theme": {
+    "dark": "Dark mode",
+    "light": "Light mode",
+    "toggle": "Toggle theme"
+  },
+  "filters": {
+    "all": "All",
+    "reset": "Reset",
+    "user": "User",
+    "userSearch": "Search by name or email…",
+    "dateFrom": "From date",
+    "dateTo": "To date",
+    "goal": "Sleep goal",
+    "subscription": "Subscription",
+    "sessionType": "Session type",
+    "zone": "Sleep zone",
+    "source": "Source"
+  },
+  "pagination": {
+    "page": "Page {{page}} of {{total}}"
+  },
+  "subscription": {
+    "ACTIVE": "Active",
+    "TRIAL": "Trial",
+    "EXPIRED": "Expired",
+    "CANCELLED": "Cancelled"
+  },
+  "gender": {
+    "MALE": "Male",
+    "FEMALE": "Female",
+    "OTHER": "Other",
+    "PREFER_NOT_TO_SAY": "Prefer not to say"
+  },
+  "session": {
+    "MAIN": "Main",
+    "NAP": "Nap"
+  },
+  "source": {
+    "manual": "Manual",
+    "health_sync": "Health sync",
+    "auto": "Auto"
+  },
+  "mainGoals": {
+    "SEGMENTED_SLEEP": "Segmented sleep",
+    "DEBT_RECOVERY": "Debt recovery",
+    "NAP_MASTERY": "Nap mastery",
+    "QUALITY_TRACKING": "Quality tracking"
+  },
+  "status": {
+    "ACTIVE": "Active",
+    "PENDING_VERIFICATION": "Pending",
+    "SUSPENDED": "Suspended",
+    "INACTIVE": "Inactive"
+  },
+  "auth": {
+    "title": "Super Admin Panel",
+    "subtitle": "Sobat — Admin sign in",
+    "loginButton": "Sign in",
+    "loggingIn": "Signing in…",
+    "loginFailed": "Login failed",
+    "rememberMe": "Remember me",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
+  },
+  "overview": {
+    "title": "Overview",
+    "sectionOverview": "Key metrics",
+    "sectionSleep": "Sleep analytics",
+    "sectionBusiness": "Revenue & users",
+    "totalUsers": "Total users",
+    "activeSubscriptions": "Active subscriptions",
+    "monthlyRevenue": "Revenue this month",
+    "avgSleepHours": "Avg sleep hours today",
+    "avgSleepHoursHint": "Average actual sleep hours across all users with a sleep-debt snapshot for today.",
+    "userGrowth": "User growth",
+    "zoneDistribution": "Sleep zone distribution",
+    "zoneDistributionHint": "Users in each sleep zone today (from sleep-debt snapshots).",
+    "monthlyRevenueChart": "Monthly revenue",
+    "recentUsers": "Recent users",
+    "hoursUnit": "hrs",
+    "vsLastMonth": "vs last month"
+  },
+  "zones": {
+    "PEAK": "Peak",
+    "COMFORT": "Comfort",
+    "CAUTION": "Caution",
+    "DANGER": "Danger"
+  },
+  "analytics": {
+    "title": "Analytics",
+    "dailySleepHours": "Daily sleep hours",
+    "dailySleepHoursHint": "Daily average actual sleep hours across all users — last {{days}} days.",
+    "debtComparison": "Sleep debt comparison",
+    "debtComparisonHint": "Daily average debt vs target hours across all users — last {{days}} days. Debt is counted when actual sleep is below target.",
+    "sleepGoals": "Sleep goal distribution",
+    "bedtimeDistribution": "Popular bedtimes",
+    "avgDebt": "Avg debt (hours)",
+    "targetHours": "Avg target (hours)",
+    "sleepSessionsMonth": "Sleep sessions this month",
+    "napSessionsMonth": "Nap sessions",
+    "avgNapDuration": "Avg nap duration",
+    "usersHitTarget": "Hit target today",
+    "minutes": "min"
+  },
+  "sleepGoals": {
+    "FAJR_WAKE": "Fajr wake",
+    "SHIFT_SYSTEM": "Shift system",
+    "DEBT_RECOVERY": "Debt recovery",
+    "FOCUS_BOOST": "Focus boost"
+  },
+  "bedtime": {
+    "BEFORE_10PM": "Before 10 PM",
+    "TEN_TO_12": "10 PM – 12 AM",
+    "AFTER_MIDNIGHT": "After midnight"
+  },
+  "dashboard": {
+    "subtitle": "Platform performance, sleep insights, and revenue at a glance",
+    "subscriptionStatus": "Subscription status",
+    "recentActivity": "Recent activity",
+    "joined": "Joined",
+    "newUsersThisWeek": "{{count}} new users this week",
+    "viewAllActivity": "View all activity →",
+    "quick": {
+      "newUsersToday": "New users today",
+      "newSubscriptions": "New subscriptions",
+      "avgSessionDuration": "Avg session duration",
+      "sleepGoalCompletion": "Sleep goal completion"
+    },
+    "activity": {
+      "userRegistered": "New user registered",
+      "subscriptionPurchased": "Subscription purchased",
+      "sleepProfileUpdated": "Sleep profile updated",
+      "adminAction": "Admin action",
+      "newUserJoined": "Joined the platform",
+      "signedInFrom": "Signed in from {{ip}}",
+      "signedInDashboard": "Signed in to the dashboard",
+      "signedOut": "Signed out · {{module}}",
+      "updatedTarget": "Updated: {{name}}",
+      "updatedEntityType": "Updated {{type}} in {{module}}",
+      "updatedModule": "Updated records in {{module}}",
+      "createdInModule": "Created in {{module}}",
+      "deletedInModule": "Deleted in {{module}}",
+      "exportedModule": "Exported data from {{module}}"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "exportCsv": "Export CSV",
+    "colUser": "User",
+    "colGender": "Gender",
+    "colGoal": "Sleep goal",
+    "colZone": "Sleep zone",
+    "colSubscription": "Subscription",
+    "colLastActive": "Last active",
+    "ban": "Ban",
+    "unban": "Unban",
+    "deleteTitle": "Delete user",
+    "deleteMessage": "Are you sure you want to delete this user?"
+  },
+  "supervisors": {
+    "title": "Supervisors",
+    "addSupervisor": "Add Supervisor",
+    "editSupervisor": "Edit Supervisor",
+    "colRoles": "Roles",
+    "colLastLogin": "Last Login",
+    "colStatus": "Status",
+    "selectRoles": "Select roles",
+    "deleteTitle": "Delete supervisor",
+    "deleteMessage": "Are you sure you want to delete this supervisor?",
+    "activateTitle": "Activate supervisor",
+    "deactivateTitle": "Deactivate supervisor",
+    "activateConfirm": "Are you sure you want to activate this supervisor?",
+    "deactivateConfirm": "Are you sure you want to deactivate this supervisor?",
+    "edit": "Edit",
+    "delete": "Delete",
+    "toggleStatus": "Change status",
+    "statusUpdateError": "Failed to update supervisor status"
+  },
+  "roles": { "title": "Roles" },
+  "permissions": {
+    "title": "Permissions Matrix",
+    "role": "Role",
+    "modules": {
+      "users": "Users",
+      "admins": "Admins",
+      "roles": "Roles",
+      "permissions": "Permissions",
+      "onboarding": "Onboarding",
+      "sleep_profiles": "Sleep Profiles",
+      "sleep_records": "Sleep Records",
+      "naps": "Naps",
+      "sleep_debt": "Sleep Debt",
+      "health_sources": "Health Sources",
+      "reminders": "Reminders",
+      "notifications": "Notifications",
+      "subscriptions": "Subscriptions",
+      "payments": "Payments",
+      "content": "Content",
+      "settings": "Settings",
+      "support": "Support",
+      "analytics": "Analytics",
+      "audit_logs": "Audit Logs"
+    },
+    "actions": {
+      "read": "Read",
+      "create": "Create",
+      "update": "Update",
+      "delete": "Delete",
+      "manage": "Manage",
+      "send": "Send"
+    },
+    "roles": {
+      "super_admin": "Super Admin",
+      "support_manager": "Support Manager",
+      "content_manager": "Content Manager"
+    }
+  },
+  "sleep": {
+    "filesTitle": "Sleep Profiles",
+    "logsTitle": "Sleep Logs",
+    "napsTitle": "Naps",
+    "debtTitle": "Sleep Debt",
+    "healthTitle": "Sleep Data Input Methods",
+    "syncTitle": "Sync Logs"
+  },
+  "syncLogs": {
+    "pageSubtitle": "History of sleep data sync jobs from Apple Health, manual entry, and integrations.",
+    "filterAll": "All",
+    "searchPlaceholder": "Search by sync job ID…",
+    "empty": "No sync jobs match your filters.",
+    "colJob": "Sync Job",
+    "colSource": "Source",
+    "colStatus": "Status",
+    "colRecords": "Records Processed",
+    "colErrors": "Errors",
+    "colStarted": "Started At",
+    "colCompleted": "Completed At",
+    "recordsCount": "{{count}} records",
+    "noErrors": "None",
+    "viewMore": "View more",
+    "viewDetails": "View details",
+    "detailsTitle": "Sync job #{{id}}",
+    "copyId": "Copy full ID",
+    "copied": "Copied!",
+    "retrySync": "Retry sync",
+    "retryQueued": "Retry queued for job #{{id}}",
+    "sourceApple": "Apple Health",
+    "sourceManual": "Manual Entry",
+    "sourceOther": "Integration",
+    "status": {
+      "SUCCESS": "Success",
+      "PARTIAL": "Partial",
+      "FAILED": "Failed",
+      "IN_PROGRESS": "In progress"
+    }
+  },
+  "sleepFiles": {
+    "date": "Date",
+    "profile": "Sleep profile",
+    "streak": "{{n}}-day streak",
+    "targetBed": "Target bedtime",
+    "targetWake": "Target wake time",
+    "dailyPlan": "Daily plan",
+    "fajr": "Fajr",
+    "phase1": "Phase 1",
+    "phase2": "Phase 2",
+    "target": "Target",
+    "timeline": "Sleep timeline",
+    "colStreak": "Streak",
+    "colOnboarding": "Onboarding",
+    "onboardingDone": "Complete",
+    "onboardingPending": "Incomplete",
+    "detailTitle": "Sleep profile details",
+    "noPlan": "No daily plan for this date"
+  },
+  "naps": {
+    "colStart": "Nap start",
+    "colEnd": "Nap end",
+    "colDuration": "Duration",
+    "colNotes": "Notes"
+  },
+  "reminders": {
+    "title": "Reminders",
+    "pageSubtitle": "Individual user sleep reminders — bedtime, wake-up, and Fajr.",
+    "allDays": "Every day",
+    "filterAll": "All",
+    "notificationsTitle": "Notifications",
+    "colType": "Type",
+    "colTime": "Time",
+    "colDays": "Days",
+    "colFajrOffset": "Fajr offset",
+    "fajrOffsetValue": "{{minutes}} min",
+    "types": {
+      "BEDTIME": "Bedtime",
+      "WAKE_UP": "Wake up",
+      "FAJR": "Fajr",
+      "NAP": "Nap",
+      "CUSTOM": "Custom"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "PAUSED": "Paused",
+      "DISABLED": "Disabled"
+    }
+  },
+  "customNotifications": {
+    "pageTitle": "Custom notifications",
+    "pageSubtitle": "Notification templates users can opt into from settings.",
+    "sectionTitle": "Custom notifications",
+    "sectionSubtitle": "Notification templates users can opt into from settings.",
+    "add": "Add template",
+    "edit": "Edit template",
+    "colTitle": "Title",
+    "colCategory": "Category",
+    "colTrigger": "Timing type",
+    "colOffset": "Offset",
+    "colEnabledUsers": "Enabled users",
+    "titleAr": "Arabic title",
+    "titleEn": "English title",
+    "descriptionAr": "Arabic description",
+    "descriptionEn": "English description",
+    "category": "Category",
+    "triggerType": "Trigger type",
+    "fixedTime": "Fixed time",
+    "offsetHint": "Negative = before, positive = after (minutes)",
+    "active": "Active",
+    "inactive": "Inactive",
+    "triggerFixed": "Fixed time",
+    "triggerRelative": "Relative",
+    "deleteTitle": "Delete template",
+    "deleteMessage": "Delete this template? Users will no longer see it.",
+    "duration": {
+      "and": "and",
+      "hours_one": "1 hour",
+      "hours_other": "{{count}} hours",
+      "minutes_one": "1 minute",
+      "minutes_other": "{{count}} minutes"
+    },
+    "categories": {
+      "SLEEP": "Sleep",
+      "WORSHIP": "Worship",
+      "HEALTH": "Health",
+      "CUSTOM": "Custom"
+    },
+    "triggerTypes": {
+      "FIXED_TIME": "Fixed time",
+      "RELATIVE_TO_SLEEP": "Relative to sleep",
+      "RELATIVE_TO_WAKE": "Relative to wake",
+      "RELATIVE_TO_FAJR": "Relative to Fajr"
+    },
+    "offsetLabel": {
+      "RELATIVE_TO_SLEEP": "Minutes before/after sleep",
+      "RELATIVE_TO_WAKE": "Minutes before/after wake",
+      "RELATIVE_TO_FAJR": "Minutes before/after Fajr"
+    },
+    "offset": {
+      "RELATIVE_TO_SLEEP": {
+        "before": "{{duration}} before sleep",
+        "after": "{{duration}} after sleep",
+        "at": "At sleep time"
+      },
+      "RELATIVE_TO_WAKE": {
+        "before": "{{duration}} before wake",
+        "after": "{{duration}} after wake",
+        "at": "At wake time"
+      },
+      "RELATIVE_TO_FAJR": {
+        "before": "{{duration}} before Fajr",
+        "after": "{{duration}} after Fajr",
+        "at": "At Fajr"
+      }
+    }
+  },
+  "days": {
+    "sun": "Sun",
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat"
+  },
+  "sleepDebt": {
+    "colDate": "Date",
+    "colTarget": "Target",
+    "colActual": "Actual",
+    "colDebt": "Debt",
+    "colCumulative": "Cumulative",
+    "colSleepZone": "Sleep Zone",
+    "colTrend": "Trend (7 days)",
+    "statTotalUsers": "Total users",
+    "statAvgDebt": "Avg debt today",
+    "statMostImproved": "Most improved",
+    "statHighestDebt": "Highest debt",
+    "zone": {
+      "optimal": "Optimal",
+      "moderate": "Moderate",
+      "poor": "Poor",
+      "critical": "Critical"
+    }
+  },
+  "healthSources": {
+    "pageSubtitle": "See where sleep records come from — automatic Apple Watch sync or manual user entry.",
+    "summaryTotalRecords": "Total sleep records",
+    "summarySplit": "Data contribution split",
+    "summaryAppleShare": "Apple Watch {{pct}}%",
+    "summaryManualShare": "Manual entry {{pct}}%",
+    "appleName": "Apple Watch / Apple Health",
+    "appleDescription": "Sleep data synced automatically from Apple Watch and Apple Health.",
+    "manualName": "Manual Entry",
+    "manualDescription": "Sleep sessions added manually by users in the app.",
+    "badgeAuto": "AUTO",
+    "badgeManual": "MANUAL",
+    "statusActive": "Active",
+    "statusDisabled": "Disabled",
+    "recordCount": "Sleep records",
+    "contribution": "Data contribution",
+    "lastUpdate": "Last update",
+    "noUpdates": "No records yet",
+    "toggleStatus": "Toggle {{name}}",
+    "appleNotConfigured": "Apple Health source is not configured"
+  },
+  "notifications": {
+    "pageSubtitle": "View notifications sent to users and broadcast new alerts.",
+    "tabLog": "Log",
+    "tabSend": "Send Notification",
+    "colType": "Type",
+    "colTitle": "Title",
+    "colChannel": "Channel",
+    "colRead": "Read",
+    "colSent": "Sent At",
+    "filterAll": "All",
+    "searchPlaceholder": "Search by user name or email…",
+    "empty": "No notifications match your filters.",
+    "target": "Audience",
+    "targetAll": "All active users",
+    "targetUser": "Specific users",
+    "targetSubscribers": "Active subscribers",
+    "titleAr": "Title (Arabic)",
+    "titleEn": "Title (English, optional)",
+    "bodyAr": "Message (Arabic)",
+    "bodyEn": "Message (English, optional)",
+    "channel": "Delivery channel",
+    "send": "Send notification",
+    "sending": "Sending…",
+    "sendSuccess": "Notification sent to {{count}} user(s).",
+    "preview": "Preview",
+    "previewTitle": "Notification title",
+    "previewBody": "Notification message will appear here.",
+    "charCount": "{{current}} / {{max}}",
+    "types": {
+      "REMINDER": "Reminder",
+      "SYSTEM": "System",
+      "SLEEP_DEBT": "Sleep debt",
+      "GOAL_ACHIEVED": "Goal achieved",
+      "SUBSCRIPTION": "Subscription",
+      "SUPPORT": "Support"
+    },
+    "channels": {
+      "IN_APP": "In-app",
+      "PUSH": "Push",
+      "EMAIL": "Email",
+      "SMS": "SMS"
+    },
+    "errors": {
+      "titleArRequired": "Arabic title is required.",
+      "bodyArRequired": "Arabic message is required.",
+      "usersRequired": "Select at least one user.",
+      "bodyTooLong": "Message must be {{max}} characters or fewer."
+    }
+  },
+  "audit": {
+    "subtitle": "Security audit trail of every admin action across the platform.",
+    "colAction": "Action",
+    "colModule": "Module",
+    "colAdmin": "Admin",
+    "colDate": "Date & time",
+    "colEntityType": "Entity type",
+    "colEntityId": "Entity ID",
+    "colEntity": "Entity",
+    "colIp": "IP address",
+    "colDetails": "Details",
+    "filterAdmin": "Admin",
+    "export": "Export CSV",
+    "exportAll": "Export all records",
+    "exportFiltered": "Export filtered results",
+    "before": "Before",
+    "after": "After",
+    "searchPlaceholder": "Search by admin name, entity ID, IP address…",
+    "empty": "No audit logs match your filters.",
+    "viewDetails": "View →",
+    "detailTitle": "Action details",
+    "changes": "Changes",
+    "field": "Field",
+    "noChanges": "No field-level changes recorded.",
+    "device": "Device",
+    "logId": "Log ID",
+    "copyId": "Copy ID",
+    "copied": "Copied!",
+    "statsTotal": "Total actions",
+    "statsToday": "Today",
+    "statsDeletes": "Deletes",
+    "statsExports": "Exports",
+    "showing": "Showing {{from}}–{{to}} of {{total}} entries",
+    "perPage": "Per page",
+    "prev": "Previous",
+    "next": "Next",
+    "modules": {
+      "users": "Users",
+      "subscriptions": "Subscriptions",
+      "payments": "Payments",
+      "content": "Content",
+      "settings": "Settings",
+      "support": "Support",
+      "sleep": "Sleep",
+      "roles": "Roles",
+      "admins": "Admins",
+      "plans": "Plans",
+      "notifications": "Notifications"
+    }
+  },
+  "auditAction": {
+    "CREATE": "Create",
+    "UPDATE": "Update",
+    "DELETE": "Delete",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "EXPORT": "Export",
+    "IMPORT": "Import",
+    "OTHER": "Other"
+  },
+  "finance": {
+    "plansTitle": "Subscription Plans",
+    "subscriptionsTitle": "User Subscriptions",
+    "paymentsTitle": "Payments"
+  },
+  "plans": {
+    "add": "Add plan",
+    "edit": "Edit plan",
+    "active": "Active",
+    "nameAr": "Name (Arabic)",
+    "nameEn": "Name (English)",
+    "descAr": "Description (Arabic)",
+    "descEn": "Description (English)",
+    "price": "Price",
+    "currency": "Currency",
+    "trialDays": "{{n}} trial days",
+    "trialDaysLabel": "Trial days",
+    "features": "Features",
+    "featureKey": "Key",
+    "featureValue": "Value",
+    "addFeature": "Add feature",
+    "deleteTitle": "Delete plan",
+    "deleteMessage": "Delete this plan?",
+    "billing": {
+      "MONTHLY": "Monthly",
+      "QUARTERLY": "Quarterly",
+      "YEARLY": "Yearly",
+      "LIFETIME": "Lifetime",
+      "WEEKLY": "Weekly"
+    }
+  },
+  "subscriptions": {
+    "statsActive": "Active",
+    "statsTrial": "Trial",
+    "statsExpired": "Expired",
+    "statsCancelled": "Cancelled",
+    "filterPlan": "Plan",
+    "colUser": "User",
+    "colPlan": "Plan",
+    "colStart": "Start date",
+    "colEnd": "End date",
+    "colAutoRenew": "Auto-renew",
+    "colCancelled": "Cancelled at",
+    "detailTitle": "Subscription details",
+    "paymentHistory": "Payment history"
+  },
+  "subscriptionStatus": {
+    "ACTIVE": "Active",
+    "TRIAL": "Trial",
+    "EXPIRED": "Expired",
+    "CANCELLED": "Cancelled",
+    "PENDING": "Pending"
+  },
+  "payments": {
+    "statsTotal": "Total revenue",
+    "statsMonth": "This month",
+    "statsAvg": "Avg per user",
+    "statsRefunds": "Refunds",
+    "colRef": "Payment ref",
+    "colAmount": "Amount",
+    "colCurrency": "Currency",
+    "colMethod": "Method",
+    "colPaidAt": "Paid at",
+    "refund": "Refund",
+    "refundTitle": "Confirm refund",
+    "refundMessage": "Refund {{amount}}?",
+    "pageTotal": "Page total"
+  },
+  "paymentStatus": {
+    "PENDING": "Pending",
+    "COMPLETED": "Completed",
+    "FAILED": "Failed",
+    "REFUNDED": "Refunded",
+    "CANCELLED": "Cancelled"
+  },
+  "paymentMethod": {
+    "CREDIT_CARD": "Card",
+    "APPLE_PAY": "Apple Pay",
+    "GOOGLE_PAY": "Google Pay",
+    "BANK_TRANSFER": "Bank transfer",
+    "OTHER": "Other"
+  },
+  "content": {
+    "title": "Content",
+    "pageSubtitle": "Manage static pages, FAQs, and sleep tips for the app.",
+    "tabPages": "Pages",
+    "tabTips": "Sleep tips",
+    "colTitleAr": "Title",
+    "colType": "Type",
+    "colOrder": "Order",
+    "colUpdated": "Last updated",
+    "colCategory": "Category",
+    "addPage": "Add page",
+    "editPage": "Edit page",
+    "addTip": "Add sleep tip",
+    "editTip": "Edit sleep tip",
+    "slug": "Slug",
+    "titleAr": "Title (Arabic)",
+    "titleEn": "Title (English)",
+    "contentAr": "Content (Arabic)",
+    "contentEn": "Content (English)",
+    "imageUrl": "Image URL",
+    "filterAll": "All",
+    "searchPlaceholder": "Search by title…",
+    "emptyPages": "No pages match your filters.",
+    "emptyTips": "No sleep tips match your filters.",
+    "rowCountPages": "{{count}} pages",
+    "rowCountTips": "{{count}} sleep tips",
+    "preview": "Preview",
+    "previewTitle": "Content preview",
+    "deleteTitle": "Delete content",
+    "deletePageMessage": "Delete \"{{title}}\"? This cannot be undone.",
+    "deleteTipMessage": "Delete tip \"{{title}}\"? This cannot be undone.",
+    "types": {
+      "PAGE": "Page",
+      "FAQ": "FAQ",
+      "TIP": "Tip",
+      "ANNOUNCEMENT": "Announcement"
+    },
+    "editor": {
+      "back": "Back to Content",
+      "saveDraft": "Save draft",
+      "publish": "Publish",
+      "sidebarTitle": "Page settings",
+      "tabAr": "Arabic 🇸🇦",
+      "tabEn": "English 🇬🇧",
+      "placeholder": "Start writing your content here…",
+      "wordCount": "{{count}} words",
+      "viewSource": "View HTML source",
+      "liveWarning": "This page is live. Changes will be visible to users immediately.",
+      "autoSaved": "Auto-saved {{time}}",
+      "saveSuccess": "Page saved successfully ✓",
+      "saveError": "Failed to save page",
+      "validation": "Slug and Arabic title are required",
+      "leaveTitle": "Unsaved changes",
+      "leaveMessage": "You have unsaved changes. Leave without saving?",
+      "urlPreview": "sabat.app/{{slug}}",
+      "lastUpdated": "Last updated {{time}}",
+      "created": "Created {{time}}",
+      "order": "Order #{{n}}",
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strikethrough",
+      "link": "Insert link",
+      "image": "Insert image",
+      "bulletList": "Bullet list",
+      "numberList": "Numbered list",
+      "blockquote": "Blockquote",
+      "code": "Code block",
+      "table": "Insert table",
+      "undo": "Undo",
+      "redo": "Redo",
+      "linkPrompt": "Enter URL",
+      "imagePrompt": "Enter image URL"
+    }
+  },
+  "contentStatus": {
+    "DRAFT": "Draft",
+    "PUBLISHED": "Published",
+    "ARCHIVED": "Archived"
+  },
+  "settings": {
+    "title": "Settings",
+    "pageSubtitle": "Configure global app behavior, localization, and integrations.",
+    "groupApp": "App",
+    "groupSleep": "Sleep",
+    "groupNotifications": "Notifications",
+    "groupSubscription": "Subscription",
+    "groupOther": "Other settings",
+    "saveAll": "Save all changes",
+    "saveSection": "Save changes",
+    "saving": "Saving…",
+    "saveSuccess": "Settings saved successfully",
+    "saveError": "Failed to save. Please try again.",
+    "lastSaved": "Last saved {{time}}",
+    "unsavedChanges": "Unsaved changes",
+    "noChanges": "No unsaved changes",
+    "maintenanceOn": "Maintenance ON",
+    "maintenanceOff": "Live",
+    "localeAr": "🇸🇦 Arabic (AR)",
+    "localeEn": "🇬🇧 English (EN)",
+    "sections": {
+      "identity": {
+        "title": "App identity",
+        "subtitle": "How your app appears to users in stores and onboarding."
+      },
+      "contact": {
+        "title": "Support & contact",
+        "subtitle": "Channels users can reach for help."
+      },
+      "localization": {
+        "title": "Localization",
+        "subtitle": "Default language and timezone for new users."
+      },
+      "system": {
+        "title": "System",
+        "subtitle": "Platform-wide switches and compliance metadata."
+      },
+      "sleep": {
+        "subtitle": "Sleep tracking limits and data retention rules."
+      },
+      "notifications": {
+        "subtitle": "Default notification behavior for the mobile app."
+      },
+      "subscription": {
+        "subtitle": "Billing gateways and trial configuration."
+      },
+      "other": {
+        "title": "Other settings",
+        "subtitle": "Additional configuration keys."
+      }
+    },
+    "fields": {
+      "app_name_ar": {
+        "label": "App name (Arabic)",
+        "helper": "Displayed in the Arabic UI and app store listing."
+      },
+      "app_name_en": {
+        "label": "App name (English)",
+        "helper": "Displayed in the English UI and app store listing."
+      },
+      "app_support_email": {
+        "label": "Support email",
+        "helper": "Users see this address for help and feedback."
+      },
+      "app_support_phone": {
+        "label": "Support phone",
+        "helper": "Saudi mobile number without country code (e.g. 5XXXXXXXX)."
+      },
+      "default_locale": {
+        "label": "Default language",
+        "helper": "Language applied for new users before they choose a preference."
+      },
+      "default_timezone": {
+        "label": "Default timezone",
+        "helper": "Used for reminders, sleep logs, and scheduled jobs."
+      },
+      "maintenance_mode": {
+        "label": "Maintenance mode",
+        "helper": "When ON, the app shows a maintenance screen to users."
+      },
+      "privacy_policy_version": {
+        "label": "Privacy policy version",
+        "helper": "Bump when legal text changes to prompt re-acceptance."
+      },
+      "min_sleep_hours": {
+        "label": "Minimum sleep hours",
+        "helper": "Lower bound for valid sleep session duration."
+      },
+      "max_sleep_hours": {
+        "label": "Maximum sleep hours",
+        "helper": "Upper bound for valid sleep session duration."
+      },
+      "sleep.manual_entry_enabled": {
+        "label": "Manual sleep entry",
+        "helper": "Allow users to log sleep without a connected device."
+      },
+      "fajr_offset_minutes_default": {
+        "label": "Default Fajr offset (minutes)",
+        "helper": "Default minutes after Fajr for wake reminders."
+      },
+      "analytics_retention_days": {
+        "label": "Analytics retention (days)",
+        "helper": "How long aggregated analytics are kept."
+      },
+      "fajr_reminder_default": {
+        "label": "Fajr reminder default",
+        "helper": "Enable Fajr reminders for new users by default."
+      },
+      "push_notifications_enabled": {
+        "label": "Push notifications",
+        "helper": "Master switch for sending push notifications."
+      },
+      "subscription_trial_enabled": {
+        "label": "Free trial",
+        "helper": "Allow new users to start a subscription trial."
+      },
+      "moyasar_enabled": {
+        "label": "Moyasar gateway",
+        "helper": "Enable Moyasar as a payment provider."
+      },
+      "stripe_enabled": {
+        "label": "Stripe gateway",
+        "helper": "Enable Stripe as a payment provider."
+      }
+    }
+  },
+  "support": {
+    "title": "Support",
+    "auditTitle": "Audit Log",
+    "selectTicket": "Select a ticket to view details",
+    "emptySelectTitle": "Select a ticket to get started",
+    "emptySelectHint": "Choose a ticket from the list to view the conversation and reply.",
+    "emptyList": "No tickets yet.",
+    "emptySearch": "No tickets match your search.",
+    "searchPlaceholder": "Search tickets…",
+    "ticketCount": "{{count}} tickets",
+    "sortBy": "Sort by",
+    "sortNewest": "Newest",
+    "sortOldest": "Oldest",
+    "sortPriority": "Priority",
+    "sortUpdated": "Recently updated",
+    "backToList": "Back to list",
+    "priority": "Priority",
+    "closeTicket": "Close ticket",
+    "replyPlaceholder": "Type your reply…",
+    "send": "Send",
+    "sendReply": "Send reply",
+    "staff": "Support Team",
+    "unknownUser": "Unknown user",
+    "assignToMe": "Assign to me",
+    "assignedTo": "Assigned to",
+    "unassigned": "Unassigned",
+    "updateSuccess": "Ticket updated",
+    "replySuccess": "Reply sent",
+    "quickReplies": "Quick replies",
+    "selectTemplate": "Choose a template…",
+    "attach": "Attach file",
+    "metaCreated": "Created {{time}}",
+    "metaUser": "User: {{name}}",
+    "metaChannel": "Channel: {{channel}}",
+    "metaCategory": "Category: {{category}}",
+    "channelInApp": "In-app",
+    "categoryGeneral": "General",
+    "quickReplyTemplates": {
+      "acknowledge": "Thank you for reaching out. We have received your ticket and will respond shortly.",
+      "investigating": "We are looking into this issue and will update you as soon as we have more information.",
+      "resolved": "This issue has been resolved. Please let us know if you need anything else.",
+      "followUp": "Could you provide more details or a screenshot to help us investigate further?"
+    }
+  },
+  "ticketStatus": {
+    "OPEN": "Open",
+    "IN_PROGRESS": "In progress",
+    "WAITING_USER": "Waiting user",
+    "RESOLVED": "Resolved",
+    "CLOSED": "Closed"
+  },
+  "ticketPriority": {
+    "LOW": "Low",
+    "MEDIUM": "Medium",
+    "HIGH": "High",
+    "URGENT": "Urgent"
+  }
+}

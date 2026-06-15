@@ -1,0 +1,996 @@
+{
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "overview": "نظرة عامة",
+    "analytics": "التحليلات",
+    "identity": "الهوية والصلاحيات",
+    "users": "المستخدمون",
+    "supervisors": "المشرفون",
+    "roles": "الأدوار",
+    "permissions": "مصفوفة الصلاحيات",
+    "product": "المنتج",
+    "sleepFiles": "ملفات النوم",
+    "sleepLogs": "سجلات النوم",
+    "naps": "القيلولة",
+    "sleepDebt": "دين النوم",
+    "healthSources": "طرق الإدخال",
+    "syncLogs": "سجلات المزامنة",
+    "reminders": "التذكيرات",
+    "customNotifications": "التنبيهات المخصصة",
+    "notifications": "الإشعارات",
+    "finance": "المالية والمحتوى",
+    "plans": "الخطط",
+    "subscriptions": "الاشتراكات",
+    "payments": "المدفوعات",
+    "content": "المحتوى",
+    "settings": "الإعدادات",
+    "supportSection": "الدعم والامتثال",
+    "support": "الدعم الفني",
+    "auditLog": "سجل التدقيق"
+  },
+  "common": {
+    "appName": "سبات",
+    "login": "دخول",
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "phone": "الهاتف",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "search": "بحث",
+    "view": "عرض",
+    "loading": "جارٍ التحميل…",
+    "error": "حدث خطأ",
+    "noData": "لا توجد بيانات",
+    "details": "التفاصيل",
+    "viewAll": "عرض الكل",
+    "name": "الاسم",
+    "status": "الحالة",
+    "registeredAt": "تاريخ التسجيل",
+    "actions": "إجراءات",
+    "confirm": "تأكيد",
+    "yes": "نعم",
+    "no": "لا",
+    "language": "اللغة",
+    "arabic": "عربي",
+    "english": "English",
+    "englishLabel": "ENGLISH",
+    "pageTitle": "لوحة المشرف",
+    "unauthorized": "غير مصرح",
+    "retry": "إعادة المحاولة"
+  },
+  "theme": {
+    "dark": "الوضع الداكن",
+    "light": "الوضع الفاتح",
+    "toggle": "تبديل المظهر"
+  },
+  "filters": {
+    "all": "الكل",
+    "reset": "إعادة تعيين",
+    "user": "المستخدم",
+    "userSearch": "ابحث بالاسم أو البريد…",
+    "dateFrom": "من تاريخ",
+    "dateTo": "إلى تاريخ",
+    "goal": "هدف النوم",
+    "subscription": "الاشتراك",
+    "sessionType": "نوع الجلسة",
+    "zone": "منطقة النوم",
+    "source": "المصدر"
+  },
+  "pagination": {
+    "page": "صفحة {{page}} من {{total}}"
+  },
+  "status": {
+    "ACTIVE": "نشط",
+    "PENDING_VERIFICATION": "بانتظار التحقق",
+    "SUSPENDED": "معلّق",
+    "INACTIVE": "غير نشط"
+  },
+  "subscription": {
+    "ACTIVE": "نشط",
+    "TRIAL": "تجريبي",
+    "EXPIRED": "منتهي",
+    "CANCELLED": "ملغى"
+  },
+  "gender": {
+    "MALE": "ذكر",
+    "FEMALE": "أنثى",
+    "OTHER": "آخر",
+    "PREFER_NOT_TO_SAY": "يفضل عدم الإفصاح"
+  },
+  "session": {
+    "MAIN": "رئيسية",
+    "NAP": "قيلولة"
+  },
+  "source": {
+    "manual": "يدوي",
+    "health_sync": "مزامنة صحية",
+    "auto": "تلقائي"
+  },
+  "mainGoals": {
+    "SEGMENTED_SLEEP": "نوم مجزأ",
+    "DEBT_RECOVERY": "استرداد الدين",
+    "NAP_MASTERY": "إتقان القيلولة",
+    "QUALITY_TRACKING": "تتبع الجودة"
+  },
+  "auth": {
+    "title": "لوحة السوبر أدمن",
+    "subtitle": "سَبات — تسجيل دخول المشرف",
+    "loginButton": "دخول",
+    "loggingIn": "جارٍ الدخول…",
+    "loginFailed": "فشل تسجيل الدخول",
+    "rememberMe": "تذكرني",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور"
+  },
+  "overview": {
+    "title": "نظرة عامة",
+    "sectionOverview": "مؤشرات عامة",
+    "sectionSleep": "تحليلات النوم",
+    "sectionBusiness": "الإيرادات والمستخدمون",
+    "totalUsers": "إجمالي المستخدمين",
+    "activeSubscriptions": "المشتركون النشطون",
+    "monthlyRevenue": "الإيرادات هذا الشهر",
+    "avgSleepHours": "متوسط ساعات النوم اليوم",
+    "avgSleepHoursHint": "متوسط ساعات النوم الفعلية لجميع المستخدمين الذين لديهم لقطة دين نوم اليوم.",
+    "userGrowth": "نمو المستخدمين",
+    "zoneDistribution": "توزيع مناطق النوم",
+    "zoneDistributionHint": "عدد المستخدمين في كل منطقة نوم اليوم (من لقطات دين النوم).",
+    "monthlyRevenueChart": "الإيرادات الشهرية",
+    "recentUsers": "أحدث المستخدمين",
+    "hoursUnit": "ساعة",
+    "vsLastMonth": "مقارنة بالشهر الماضي"
+  },
+  "zones": {
+    "PEAK": "ذروة",
+    "COMFORT": "راحة",
+    "CAUTION": "حذر",
+    "DANGER": "خطر"
+  },
+  "analytics": {
+    "title": "التحليلات",
+    "dailySleepHours": "ساعات النوم اليومية",
+    "dailySleepHoursHint": "متوسط ساعات النوم الفعلية يومياً لجميع المستخدمين — آخر {{days}} يوماً.",
+    "debtComparison": "مقارنة دين النوم",
+    "debtComparisonHint": "متوسط ساعات الدين والهدف لجميع المستخدمين يومياً — آخر {{days}} يوماً. يُحسب الدين عندما يكون النوم الفعلي أقل من الهدف.",
+    "sleepGoals": "توزيع أهداف النوم",
+    "bedtimeDistribution": "أكثر أوقات النوم شيوعاً",
+    "avgDebt": "متوسط الدين (ساعات)",
+    "targetHours": "متوسط الهدف (ساعات)",
+    "sleepSessionsMonth": "جلسات النوم هذا الشهر",
+    "napSessionsMonth": "جلسات القيلولة",
+    "avgNapDuration": "متوسط مدة القيلولة",
+    "usersHitTarget": "حققوا الهدف اليوم",
+    "minutes": "دقيقة"
+  },
+  "sleepGoals": {
+    "FAJR_WAKE": "استيقاظ الفجر",
+    "SHIFT_SYSTEM": "نظام الورديات",
+    "DEBT_RECOVERY": "استرداد الدين",
+    "FOCUS_BOOST": "تعزيز التركيز"
+  },
+  "bedtime": {
+    "BEFORE_10PM": "قبل 10 مساءً",
+    "TEN_TO_12": "10 – 12 مساءً",
+    "AFTER_MIDNIGHT": "بعد منتصف الليل"
+  },
+  "dashboard": {
+    "subtitle": "نظرة شاملة على أداء المنصة والنوم والإيرادات",
+    "subscriptionStatus": "حالة الاشتراكات",
+    "recentActivity": "النشاط الأخير",
+    "joined": "انضم",
+    "newUsersThisWeek": "{{count}} مستخدم جديد هذا الأسبوع",
+    "viewAllActivity": "عرض كل النشاط ←",
+    "quick": {
+      "newUsersToday": "مستخدمون جدد اليوم",
+      "newSubscriptions": "اشتراكات جديدة",
+      "avgSessionDuration": "متوسط مدة الجلسة",
+      "sleepGoalCompletion": "إنجاز هدف النوم"
+    },
+    "activity": {
+      "userRegistered": "مستخدم جديد",
+      "subscriptionPurchased": "اشتراك جديد",
+      "sleepProfileUpdated": "تحديث ملف النوم",
+      "adminAction": "إجراء إداري",
+      "newUserJoined": "انضم إلى المنصة",
+      "signedInFrom": "تسجيل دخول من {{ip}}",
+      "signedInDashboard": "تسجيل دخول إلى لوحة التحكم",
+      "signedOut": "تسجيل خروج · {{module}}",
+      "updatedTarget": "تحديث: {{name}}",
+      "updatedEntityType": "تحديث {{type}} في {{module}}",
+      "updatedModule": "تحديث سجلات في {{module}}",
+      "createdInModule": "إنشاء في {{module}}",
+      "deletedInModule": "حذف في {{module}}",
+      "exportedModule": "تصدير بيانات من {{module}}"
+    }
+  },
+  "users": {
+    "title": "المستخدمون",
+    "exportCsv": "تصدير CSV",
+    "colUser": "المستخدم",
+    "colGender": "الجنس",
+    "colGoal": "هدف النوم",
+    "colZone": "منطقة النوم",
+    "colSubscription": "الاشتراك",
+    "colLastActive": "آخر نشاط",
+    "ban": "حظر",
+    "unban": "إلغاء الحظر",
+    "deleteTitle": "حذف المستخدم",
+    "deleteMessage": "هل أنت متأكد من حذف هذا المستخدم؟"
+  },
+  "userDetail": {
+    "tabSleep": "النوم",
+    "tabSubscription": "الاشتراك",
+    "tabNotifications": "الإشعارات والتذكيرات",
+    "tabActivity": "سجل النشاط",
+    "timezone": "المنطقة الزمنية",
+    "locale": "اللغة",
+    "changeStatus": "تغيير الحالة",
+    "todaySleep": "نوم اليوم",
+    "debtRemaining": "الدين المتبقي",
+    "sleepChart": "آخر 7 أيام",
+    "paymentDate": "التاريخ",
+    "amount": "المبلغ",
+    "method": "الطريقة",
+    "reminders": "التذكيرات",
+    "recentNotifications": "آخر الإشعارات"
+  },
+  "supervisors": {
+    "title": "المشرفون",
+    "addSupervisor": "إضافة مشرف",
+    "editSupervisor": "تعديل المشرف",
+    "colRoles": "الأدوار",
+    "colLastLogin": "آخر دخول",
+    "colStatus": "الحالة",
+    "selectRoles": "اختر الأدوار",
+    "deleteTitle": "حذف المشرف",
+    "deleteMessage": "هل تريد حذف هذا المشرف؟",
+    "activateTitle": "تفعيل المشرف",
+    "deactivateTitle": "تعطيل المشرف",
+    "activateConfirm": "هل أنت متأكد أنك تريد تفعيل هذا المشرف؟",
+    "deactivateConfirm": "هل أنت متأكد أنك تريد تعطيل هذا المشرف؟",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "toggleStatus": "تغيير الحالة",
+    "statusUpdateError": "تعذّر تحديث حالة المشرف"
+  },
+  "roles": {
+    "title": "الأدوار",
+    "add": "إضافة دور",
+    "edit": "تعديل الدور",
+    "nameAr": "الاسم بالعربية",
+    "nameEn": "الاسم بالإنجليزية",
+    "description": "الوصف",
+    "adminCount": "{{count}} مشرف",
+    "showLess": "عرض أقل",
+    "deleteTitle": "حذف الدور",
+    "deleteMessage": "هل تريد حذف هذا الدور؟"
+  },
+  "permissions": {
+    "title": "مصفوفة الصلاحيات",
+    "role": "الدور",
+    "modules": {
+      "users": "المستخدمون",
+      "admins": "المشرفون",
+      "roles": "الأدوار",
+      "permissions": "الصلاحيات",
+      "onboarding": "الإعداد الذاتي",
+      "sleep_profiles": "ملفات النوم",
+      "sleep_records": "سجلات النوم",
+      "naps": "القيلولة",
+      "sleep_debt": "دين النوم",
+      "health_sources": "مصادر الصحة",
+      "reminders": "التذكيرات",
+      "notifications": "الإشعارات",
+      "subscriptions": "الاشتراكات",
+      "payments": "المدفوعات",
+      "content": "المحتوى",
+      "settings": "الإعدادات",
+      "support": "الدعم الفني",
+      "analytics": "التحليلات",
+      "audit_logs": "سجل التدقيق"
+    },
+    "actions": {
+      "read": "قراءة",
+      "create": "إنشاء",
+      "update": "تعديل",
+      "delete": "حذف",
+      "manage": "إدارة",
+      "send": "إرسال"
+    },
+    "roles": {
+      "super_admin": "مشرف أعلى",
+      "support_manager": "مدير الدعم",
+      "content_manager": "مدير المحتوى"
+    }
+  },
+  "sleep": {
+    "filesTitle": "ملفات النوم",
+    "logsTitle": "سجلات النوم",
+    "napsTitle": "القيلولة",
+    "debtTitle": "دين النوم",
+    "healthTitle": "طرق إدخال بيانات النوم",
+    "syncTitle": "سجلات المزامنة"
+  },
+  "sleepLogs": {
+    "notes": "ملاحظات",
+    "externalId": "المعرّف الخارجي",
+    "healthSource": "مصدر الصحة",
+    "col": {
+      "user": "المستخدم",
+      "type": "النوع",
+      "start": "بداية النوم",
+      "end": "نهاية النوم",
+      "duration": "المدة",
+      "source": "المصدر",
+      "quality": "الجودة",
+      "created": "تاريخ الإنشاء"
+    }
+  },
+  "sleepFiles": {
+    "date": "التاريخ",
+    "profile": "ملف النوم",
+    "streak": "سلسلة {{n}} يوم",
+    "targetBed": "وقت النوم المستهدف",
+    "targetWake": "وقت الاستيقاظ",
+    "dailyPlan": "الخطة اليومية",
+    "fajr": "الفجر",
+    "phase1": "المرحلة 1",
+    "phase2": "المرحلة 2",
+    "target": "الهدف",
+    "timeline": "جدول النوم",
+    "colStreak": "السلسلة",
+    "colOnboarding": "الإعداد",
+    "onboardingDone": "مكتمل",
+    "onboardingPending": "غير مكتمل",
+    "detailTitle": "تفاصيل ملف النوم",
+    "noPlan": "لا توجد خطة يومية لهذا التاريخ"
+  },
+  "naps": {
+    "colStart": "بداية القيلولة",
+    "colEnd": "نهاية القيلولة",
+    "colDuration": "المدة",
+    "colNotes": "ملاحظات"
+  },
+  "sleepDebt": {
+    "tabTable": "جدول",
+    "tabChart": "مخطط",
+    "colDate": "التاريخ",
+    "colTarget": "المستهدف",
+    "colActual": "الفعلي",
+    "colDebt": "الدين",
+    "colCumulative": "التراكمي",
+    "colSleepZone": "منطقة النوم",
+    "colTrend": "الاتجاه (7 أيام)",
+    "statTotalUsers": "إجمالي المستخدمين",
+    "statAvgDebt": "متوسط الدين اليوم",
+    "statMostImproved": "الأكثر تحسناً",
+    "statHighestDebt": "أعلى دين",
+    "zone": {
+      "optimal": "مثالي",
+      "moderate": "متوسط",
+      "poor": "ضعيف",
+      "critical": "حرج"
+    },
+    "chartHint": "ابحث عن مستخدم أعلاه لعرض مخطط دين النوم لآخر 30 يوماً.",
+    "chartSelectUser": "اختر مستخدماً لعرض المخطط"
+  },
+  "healthSources": {
+    "pageSubtitle": "اعرف من أين تأتي سجلات النوم — مزامنة تلقائية من Apple Watch أو إدخال يدوي من المستخدم.",
+    "summaryTotalRecords": "إجمالي سجلات النوم",
+    "summarySplit": "توزيع مصادر البيانات",
+    "summaryAppleShare": "Apple Watch {{pct}}%",
+    "summaryManualShare": "إدخال يدوي {{pct}}%",
+    "appleName": "Apple Watch / Apple Health",
+    "appleDescription": "بيانات نوم تُزامَن تلقائياً من Apple Watch وApple Health.",
+    "manualName": "إدخال يدوي",
+    "manualDescription": "جلسات نوم يضيفها المستخدمون يدوياً داخل التطبيق.",
+    "badgeAuto": "تلقائي",
+    "badgeManual": "يدوي",
+    "statusActive": "مفعّل",
+    "statusDisabled": "معطّل",
+    "recordCount": "سجلات النوم",
+    "contribution": "مساهمة البيانات",
+    "lastUpdate": "آخر تحديث",
+    "noUpdates": "لا توجد سجلات بعد",
+    "toggleStatus": "تبديل {{name}}",
+    "appleNotConfigured": "مصدر Apple Health غير مُعدّ"
+  },
+  "syncLogs": {
+    "pageSubtitle": "سجل عمليات مزامنة بيانات النوم من Apple Health والإدخال اليدوي والتكاملات.",
+    "filterAll": "الكل",
+    "searchPlaceholder": "بحث برقم المزامنة…",
+    "empty": "لا توجد عمليات مزامنة مطابقة.",
+    "colJob": "عملية المزامنة",
+    "colSource": "المصدر",
+    "colStatus": "الحالة",
+    "colRecords": "السجلات المعالجة",
+    "colErrors": "الأخطاء",
+    "colStarted": "وقت البدء",
+    "colCompleted": "وقت الانتهاء",
+    "recordsCount": "{{count}} سجل",
+    "noErrors": "لا يوجد",
+    "viewMore": "عرض المزيد",
+    "viewDetails": "عرض التفاصيل",
+    "detailsTitle": "مزامنة #{{id}}",
+    "copyId": "نسخ المعرّف",
+    "copied": "تم النسخ!",
+    "retrySync": "إعادة المزامنة",
+    "retryQueued": "تمت جدولة إعادة المزامنة #{{id}}",
+    "sourceApple": "Apple Health",
+    "sourceManual": "إدخال يدوي",
+    "sourceOther": "تكامل خارجي",
+    "status": {
+      "SUCCESS": "نجاح",
+      "PARTIAL": "جزئي",
+      "FAILED": "فشل",
+      "IN_PROGRESS": "قيد التنفيذ"
+    }
+  },
+  "reminders": {
+    "title": "التذكيرات",
+    "pageSubtitle": "تذكيرات النوم الفردية للمستخدمين — وقت النوم، الاستيقاظ، والفجر.",
+    "allDays": "كل الأيام",
+    "filterAll": "الكل",
+    "notificationsTitle": "الإشعارات",
+    "colType": "النوع",
+    "colTime": "الوقت",
+    "colDays": "أيام الأسبوع",
+    "colFajrOffset": "إزاحة الفجر",
+    "fajrOffsetValue": "{{minutes}} دقيقة",
+    "types": {
+      "BEDTIME": "وقت النوم",
+      "WAKE_UP": "الاستيقاظ",
+      "FAJR": "الفجر",
+      "NAP": "قيلولة",
+      "CUSTOM": "مخصص"
+    },
+    "status": {
+      "ACTIVE": "مفعّل",
+      "PAUSED": "متوقف",
+      "DISABLED": "معطّل"
+    }
+  },
+  "customNotifications": {
+    "pageTitle": "التنبيهات المخصصة",
+    "pageSubtitle": "قوالب تنبيهات يختارها المستخدمون تفعيلها من الإعدادات.",
+    "sectionTitle": "التنبيهات المخصصة",
+    "sectionSubtitle": "قوالب تنبيهات يختارها المستخدمون تفعيلها من الإعدادات.",
+    "add": "إضافة قالب",
+    "edit": "تعديل القالب",
+    "colTitle": "العنوان",
+    "colCategory": "الفئة",
+    "colTrigger": "نوع التوقيت",
+    "colOffset": "الإزاحة",
+    "colEnabledUsers": "المستخدمون المفعّلون",
+    "titleAr": "العنوان بالعربية",
+    "titleEn": "العنوان بالإنجليزية",
+    "descriptionAr": "الوصف بالعربية",
+    "descriptionEn": "الوصف بالإنجليزية",
+    "category": "الفئة",
+    "triggerType": "نوع التوقيت",
+    "fixedTime": "الوقت الثابت",
+    "offsetHint": "قيم سالبة = قبل، قيم موجبة = بعد (بالدقائق)",
+    "active": "مفعّل",
+    "inactive": "غير مفعّل",
+    "triggerFixed": "وقت ثابت",
+    "triggerRelative": "نسبي",
+    "deleteTitle": "حذف القالب",
+    "deleteMessage": "هل تريد حذف هذا القالب؟ لن يظهر للمستخدمين بعد الحذف.",
+    "duration": {
+      "and": "و",
+      "hours_zero": "",
+      "hours_one": "ساعة واحدة",
+      "hours_two": "ساعتين",
+      "hours_few": "{{count}} ساعات",
+      "hours_many": "{{count}} ساعة",
+      "hours_other": "{{count}} ساعة",
+      "minutes_zero": "",
+      "minutes_one": "دقيقة واحدة",
+      "minutes_two": "دقيقتين",
+      "minutes_few": "{{count}} دقائق",
+      "minutes_many": "{{count}} دقيقة",
+      "minutes_other": "{{count}} دقيقة"
+    },
+    "categories": {
+      "SLEEP": "نوم",
+      "WORSHIP": "عبادة",
+      "HEALTH": "صحة",
+      "CUSTOM": "مخصص"
+    },
+    "triggerTypes": {
+      "FIXED_TIME": "وقت ثابت",
+      "RELATIVE_TO_SLEEP": "نسبي لوقت النوم",
+      "RELATIVE_TO_WAKE": "نسبي للاستيقاظ",
+      "RELATIVE_TO_FAJR": "نسبي للفجر"
+    },
+    "offsetLabel": {
+      "RELATIVE_TO_SLEEP": "قبل/بعد وقت النوم (دقائق)",
+      "RELATIVE_TO_WAKE": "قبل/بعد وقت الاستيقاظ (دقائق)",
+      "RELATIVE_TO_FAJR": "قبل/بعد الفجر (دقائق)"
+    },
+    "offset": {
+      "RELATIVE_TO_SLEEP": {
+        "before": "قبل النوم بـ {{duration}}",
+        "after": "بعد النوم بـ {{duration}}",
+        "at": "عند وقت النوم"
+      },
+      "RELATIVE_TO_WAKE": {
+        "before": "قبل الاستيقاظ بـ {{duration}}",
+        "after": "بعد الاستيقاظ بـ {{duration}}",
+        "at": "عند الاستيقاظ"
+      },
+      "RELATIVE_TO_FAJR": {
+        "before": "قبل الفجر بـ {{duration}}",
+        "after": "بعد الفجر بـ {{duration}}",
+        "at": "عند الفجر"
+      }
+    }
+  },
+  "days": {
+    "sun": "أحد",
+    "mon": "إثنين",
+    "tue": "ثلاثاء",
+    "wed": "أربعاء",
+    "thu": "خميس",
+    "fri": "جمعة",
+    "sat": "سبت"
+  },
+  "notifications": {
+    "pageSubtitle": "عرض الإشعارات المرسلة للمستخدمين وإرسال تنبيهات جديدة.",
+    "tabLog": "السجل",
+    "tabSend": "إرسال إشعار",
+    "colType": "النوع",
+    "colTitle": "العنوان",
+    "colChannel": "القناة",
+    "colRead": "مقروء",
+    "colSent": "وقت الإرسال",
+    "filterAll": "الكل",
+    "searchPlaceholder": "بحث بالاسم أو البريد…",
+    "empty": "لا توجد إشعارات مطابقة للفلاتر.",
+    "target": "الجمهور",
+    "targetAll": "كل المستخدمين النشطين",
+    "targetUser": "مستخدمون محددون",
+    "targetSubscribers": "المشتركون النشطون",
+    "titleAr": "العنوان (عربي)",
+    "titleEn": "العنوان (إنجليزي، اختياري)",
+    "bodyAr": "الرسالة (عربي)",
+    "bodyEn": "الرسالة (إنجليزي، اختياري)",
+    "channel": "قناة الإرسال",
+    "send": "إرسال الإشعار",
+    "sending": "جارٍ الإرسال…",
+    "sendSuccess": "تم إرسال الإشعار إلى {{count}} مستخدم.",
+    "preview": "معاينة",
+    "previewTitle": "عنوان الإشعار",
+    "previewBody": "نص الإشعار يظهر هنا.",
+    "charCount": "{{current}} / {{max}}",
+    "types": {
+      "REMINDER": "تذكير",
+      "SYSTEM": "نظام",
+      "SLEEP_DEBT": "دين نوم",
+      "GOAL_ACHIEVED": "هدف محقق",
+      "SUBSCRIPTION": "اشتراك",
+      "SUPPORT": "دعم"
+    },
+    "channels": {
+      "IN_APP": "داخل التطبيق",
+      "PUSH": "Push",
+      "EMAIL": "بريد",
+      "SMS": "رسالة"
+    },
+    "errors": {
+      "titleArRequired": "العنوان بالعربية مطلوب.",
+      "bodyArRequired": "الرسالة بالعربية مطلوبة.",
+      "usersRequired": "اختر مستخدماً واحداً على الأقل.",
+      "bodyTooLong": "الرسالة يجب ألا تتجاوز {{max}} حرفاً."
+    }
+  },
+  "audit": {
+    "subtitle": "سجل أمني لكل إجراءات المشرفين على المنصة.",
+    "colAction": "الإجراء",
+    "colModule": "الوحدة",
+    "colAdmin": "المشرف",
+    "colDate": "التاريخ والوقت",
+    "colEntityType": "نوع الكيان",
+    "colEntityId": "معرّف الكيان",
+    "colEntity": "الكيان",
+    "colIp": "عنوان IP",
+    "colDetails": "التفاصيل",
+    "filterAdmin": "المشرف",
+    "export": "تصدير CSV",
+    "exportAll": "تصدير كل السجلات",
+    "exportFiltered": "تصدير النتائج المفلترة",
+    "before": "قبل",
+    "after": "بعد",
+    "searchPlaceholder": "بحث بالمشرف أو معرّف الكيان أو IP…",
+    "empty": "لا توجد سجلات مطابقة للفلاتر.",
+    "viewDetails": "عرض ←",
+    "detailTitle": "تفاصيل الإجراء",
+    "changes": "التغييرات",
+    "field": "الحقل",
+    "noChanges": "لا توجد تغييرات على مستوى الحقول.",
+    "device": "الجهاز",
+    "logId": "معرّف السجل",
+    "copyId": "نسخ المعرّف",
+    "copied": "تم النسخ!",
+    "statsTotal": "إجمالي الإجراءات",
+    "statsToday": "اليوم",
+    "statsDeletes": "حذف",
+    "statsExports": "تصدير",
+    "showing": "عرض {{from}}–{{to}} من {{total}} سجل",
+    "perPage": "لكل صفحة",
+    "prev": "السابق",
+    "next": "التالي",
+    "modules": {
+      "users": "المستخدمون",
+      "subscriptions": "الاشتراكات",
+      "payments": "المدفوعات",
+      "content": "المحتوى",
+      "settings": "الإعدادات",
+      "support": "الدعم",
+      "sleep": "النوم",
+      "roles": "الأدوار",
+      "admins": "المشرفون",
+      "plans": "الباقات",
+      "notifications": "الإشعارات"
+    }
+  },
+  "auditAction": {
+    "CREATE": "إنشاء",
+    "UPDATE": "تحديث",
+    "DELETE": "حذف",
+    "LOGIN": "دخول",
+    "LOGOUT": "خروج",
+    "EXPORT": "تصدير",
+    "IMPORT": "استيراد",
+    "OTHER": "أخرى"
+  },
+  "finance": {
+    "plansTitle": "خطط الاشتراك",
+    "subscriptionsTitle": "اشتراكات المستخدمين",
+    "paymentsTitle": "المدفوعات"
+  },
+  "plans": {
+    "add": "إضافة خطة",
+    "edit": "تعديل الخطة",
+    "active": "فعّالة",
+    "nameAr": "الاسم بالعربية",
+    "nameEn": "الاسم بالإنجليزية",
+    "descAr": "الوصف بالعربية",
+    "descEn": "الوصف بالإنجليزية",
+    "price": "السعر",
+    "currency": "العملة",
+    "trialDays": "{{n}} يوم تجريبي",
+    "trialDaysLabel": "أيام التجربة",
+    "features": "الميزات",
+    "featureKey": "المفتاح",
+    "featureValue": "القيمة",
+    "addFeature": "إضافة ميزة",
+    "deleteTitle": "حذف الخطة",
+    "deleteMessage": "هل تريد حذف هذه الخطة؟",
+    "billing": {
+      "MONTHLY": "شهري",
+      "QUARTERLY": "ربع سنوي",
+      "YEARLY": "سنوي",
+      "LIFETIME": "مدى الحياة",
+      "WEEKLY": "أسبوعي"
+    }
+  },
+  "subscriptions": {
+    "statsActive": "نشطة",
+    "statsTrial": "تجريبية",
+    "statsExpired": "منتهية",
+    "statsCancelled": "ملغاة",
+    "filterPlan": "الخطة",
+    "colUser": "المستخدم",
+    "colPlan": "الخطة",
+    "colStart": "تاريخ البدء",
+    "colEnd": "تاريخ الانتهاء",
+    "colAutoRenew": "التجديد التلقائي",
+    "colCancelled": "تاريخ الإلغاء",
+    "detailTitle": "تفاصيل الاشتراك",
+    "paymentHistory": "سجل المدفوعات"
+  },
+  "subscriptionStatus": {
+    "ACTIVE": "نشط",
+    "TRIAL": "تجريبي",
+    "EXPIRED": "منتهي",
+    "CANCELLED": "ملغى",
+    "PENDING": "معلق"
+  },
+  "payments": {
+    "statsTotal": "إجمالي الإيرادات",
+    "statsMonth": "هذا الشهر",
+    "statsAvg": "متوسط لكل مستخدم",
+    "statsRefunds": "عمليات الاسترداد",
+    "colRef": "رقم الدفعة",
+    "colAmount": "المبلغ",
+    "colCurrency": "العملة",
+    "colMethod": "الطريقة",
+    "colPaidAt": "تاريخ الدفع",
+    "refund": "استرداد",
+    "refundTitle": "تأكيد الاسترداد",
+    "refundMessage": "هل تريد استرداد {{amount}}؟",
+    "pageTotal": "إجمالي الصفحة"
+  },
+  "paymentStatus": {
+    "PENDING": "معلق",
+    "COMPLETED": "مكتمل",
+    "FAILED": "فشل",
+    "REFUNDED": "مسترد",
+    "CANCELLED": "ملغى"
+  },
+  "paymentMethod": {
+    "CREDIT_CARD": "بطاقة",
+    "APPLE_PAY": "Apple Pay",
+    "GOOGLE_PAY": "Google Pay",
+    "BANK_TRANSFER": "تحويل بنكي",
+    "OTHER": "أخرى"
+  },
+  "content": {
+    "title": "المحتوى",
+    "pageSubtitle": "إدارة الصفحات الثابتة والأسئلة الشائعة ونصائح النوم.",
+    "tabPages": "الصفحات",
+    "tabTips": "نصائح النوم",
+    "colTitleAr": "العنوان",
+    "colType": "النوع",
+    "colOrder": "الترتيب",
+    "colUpdated": "آخر تعديل",
+    "colCategory": "الفئة",
+    "addPage": "إضافة صفحة",
+    "editPage": "تعديل الصفحة",
+    "addTip": "إضافة نصيحة نوم",
+    "editTip": "تعديل النصيحة",
+    "slug": "الرابط (slug)",
+    "titleAr": "العنوان بالعربية",
+    "titleEn": "العنوان بالإنجليزية",
+    "contentAr": "المحتوى بالعربية",
+    "contentEn": "المحتوى بالإنجليزية",
+    "imageUrl": "رابط الصورة",
+    "filterAll": "الكل",
+    "searchPlaceholder": "بحث بالعنوان…",
+    "emptyPages": "لا توجد صفحات مطابقة.",
+    "emptyTips": "لا توجد نصائح مطابقة.",
+    "rowCountPages": "{{count}} صفحة",
+    "rowCountTips": "{{count}} نصيحة",
+    "preview": "معاينة",
+    "previewTitle": "معاينة المحتوى",
+    "deleteTitle": "حذف المحتوى",
+    "deletePageMessage": "حذف \"{{title}}\"؟ لا يمكن التراجع.",
+    "deleteTipMessage": "حذف النصيحة \"{{title}}\"؟ لا يمكن التراجع.",
+    "types": {
+      "PAGE": "صفحة",
+      "FAQ": "أسئلة شائعة",
+      "TIP": "نصيحة",
+      "ANNOUNCEMENT": "إعلان"
+    },
+    "editor": {
+      "back": "العودة للمحتوى",
+      "saveDraft": "حفظ مسودة",
+      "publish": "نشر",
+      "sidebarTitle": "إعدادات الصفحة",
+      "tabAr": "العربية 🇸🇦",
+      "tabEn": "English 🇬🇧",
+      "placeholder": "ابدأ كتابة المحتوى هنا…",
+      "wordCount": "{{count}} كلمة",
+      "viewSource": "عرض HTML",
+      "liveWarning": "هذه الصفحة منشورة. التغييرات ستظهر للمستخدمين فوراً.",
+      "autoSaved": "حُفظ تلقائياً {{time}}",
+      "saveSuccess": "تم حفظ الصفحة بنجاح ✓",
+      "saveError": "فشل حفظ الصفحة",
+      "validation": "الرابط والعنوان بالعربية مطلوبان",
+      "leaveTitle": "تغييرات غير محفوظة",
+      "leaveMessage": "لديك تغييرات غير محفوظة. المغادرة دون حفظ؟",
+      "urlPreview": "sabat.app/{{slug}}",
+      "lastUpdated": "آخر تعديل {{time}}",
+      "created": "أُنشئت {{time}}",
+      "order": "الترتيب #{{n}}",
+      "bold": "عريض",
+      "italic": "مائل",
+      "underline": "تسطير",
+      "strike": "يتوسطه خط",
+      "link": "إدراج رابط",
+      "image": "إدراج صورة",
+      "bulletList": "قائمة نقطية",
+      "numberList": "قائمة مرقمة",
+      "blockquote": "اقتباس",
+      "code": "كود",
+      "table": "جدول",
+      "undo": "تراجع",
+      "redo": "إعادة",
+      "linkPrompt": "أدخل الرابط",
+      "imagePrompt": "أدخل رابط الصورة"
+    }
+  },
+  "contentStatus": {
+    "DRAFT": "مسودة",
+    "PUBLISHED": "منشور",
+    "ARCHIVED": "مؤرشف"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "pageSubtitle": "ضبط سلوك التطبيق واللغة والتكاملات.",
+    "groupApp": "التطبيق",
+    "groupSleep": "النوم",
+    "groupNotifications": "الإشعارات",
+    "groupSubscription": "الاشتراك",
+    "groupOther": "إعدادات أخرى",
+    "saveAll": "حفظ كل التغييرات",
+    "saveSection": "حفظ التغييرات",
+    "saving": "جارٍ الحفظ…",
+    "saveSuccess": "تم حفظ الإعدادات بنجاح",
+    "saveError": "فشل الحفظ. حاول مرة أخرى.",
+    "lastSaved": "آخر حفظ {{time}}",
+    "unsavedChanges": "تغييرات غير محفوظة",
+    "noChanges": "لا توجد تغييرات",
+    "maintenanceOn": "وضع الصيانة مفعّل",
+    "maintenanceOff": "التطبيق يعمل",
+    "localeAr": "🇸🇦 العربية (AR)",
+    "localeEn": "🇬🇧 English (EN)",
+    "sections": {
+      "identity": {
+        "title": "هوية التطبيق",
+        "subtitle": "كيف يظهر التطبيق للمستخدمين."
+      },
+      "contact": {
+        "title": "الدعم والتواصل",
+        "subtitle": "قنوات التواصل مع المستخدمين."
+      },
+      "localization": {
+        "title": "اللغة والمنطقة",
+        "subtitle": "اللغة والمنطقة الزمنية الافتراضية."
+      },
+      "system": {
+        "title": "النظام",
+        "subtitle": "إعدادات المنصة والامتثال."
+      },
+      "sleep": {
+        "subtitle": "حدود النوم واحتفاظ البيانات."
+      },
+      "notifications": {
+        "subtitle": "سلوك الإشعارات الافتراضي."
+      },
+      "subscription": {
+        "subtitle": "بوابات الدفع والتجربة المجانية."
+      },
+      "other": {
+        "title": "إعدادات أخرى",
+        "subtitle": "مفاتيح إضافية."
+      }
+    },
+    "fields": {
+      "app_name_ar": {
+        "label": "اسم التطبيق (عربي)",
+        "helper": "يظهر في الواجهة العربية ومتجر التطبيقات."
+      },
+      "app_name_en": {
+        "label": "اسم التطبيق (إنجليزي)",
+        "helper": "يظهر في الواجهة الإنجليزية."
+      },
+      "app_support_email": {
+        "label": "بريد الدعم",
+        "helper": "عنوان البريد للمساعدة والملاحظات."
+      },
+      "app_support_phone": {
+        "label": "هاتف الدعم",
+        "helper": "رقم سعودي بدون مفتاح الدولة (مثل 5XXXXXXXX)."
+      },
+      "default_locale": {
+        "label": "اللغة الافتراضية",
+        "helper": "للمستخدمين الجدد قبل اختيار اللغة."
+      },
+      "default_timezone": {
+        "label": "المنطقة الزمنية",
+        "helper": "للتذكيرات وسجلات النوم."
+      },
+      "maintenance_mode": {
+        "label": "وضع الصيانة",
+        "helper": "عند التفعيل يظهر شاشة صيانة للمستخدمين."
+      },
+      "privacy_policy_version": {
+        "label": "إصدار سياسة الخصوصية",
+        "helper": "ارفع الرقم عند تحديث النص القانوني."
+      },
+      "min_sleep_hours": {
+        "label": "الحد الأدنى لساعات النوم",
+        "helper": "أقل مدة نوم مقبولة."
+      },
+      "max_sleep_hours": {
+        "label": "الحد الأقصى لساعات النوم",
+        "helper": "أكبر مدة نوم مقبولة."
+      },
+      "sleep.manual_entry_enabled": {
+        "label": "الإدخال اليدوي للنوم",
+        "helper": "السماح بتسجيل النوم بدون جهاز."
+      },
+      "fajr_offset_minutes_default": {
+        "label": "إزاحة الفجر الافتراضية (دقيقة)",
+        "helper": "دقائق بعد الفجر للتذكير."
+      },
+      "analytics_retention_days": {
+        "label": "احتفاظ التحليلات (يوم)",
+        "helper": "مدة الاحتفاظ بالتحليلات."
+      },
+      "fajr_reminder_default": {
+        "label": "تذكير الفجر افتراضياً",
+        "helper": "تفعيل تذكير الفجر للمستخدمين الجدد."
+      },
+      "push_notifications_enabled": {
+        "label": "إشعارات الدفع",
+        "helper": "المفتاح الرئيسي لإرسال Push."
+      },
+      "subscription_trial_enabled": {
+        "label": "التجربة المجانية",
+        "helper": "السماح بتجربة مجانية للاشتراك."
+      },
+      "moyasar_enabled": {
+        "label": "بوابة ميسر",
+        "helper": "تفعيل ميسر كمزود دفع."
+      },
+      "stripe_enabled": {
+        "label": "بوابة Stripe",
+        "helper": "تفعيل Stripe كمزود دفع."
+      }
+    }
+  },
+  "support": {
+    "title": "الدعم الفني",
+    "auditTitle": "سجل التدقيق",
+    "selectTicket": "اختر تذكرة لعرض التفاصيل",
+    "emptySelectTitle": "اختر تذكرة للبدء",
+    "emptySelectHint": "اختر تذكرة من القائمة لعرض المحادثة والرد.",
+    "emptyList": "لا توجد تذاكر.",
+    "emptySearch": "لا توجد تذاكر مطابقة للبحث.",
+    "searchPlaceholder": "بحث في التذاكر…",
+    "ticketCount": "{{count}} تذكرة",
+    "sortBy": "ترتيب حسب",
+    "sortNewest": "الأحدث",
+    "sortOldest": "الأقدم",
+    "sortPriority": "الأولوية",
+    "sortUpdated": "آخر تحديث",
+    "backToList": "العودة للقائمة",
+    "priority": "الأولوية",
+    "closeTicket": "إغلاق التذكرة",
+    "replyPlaceholder": "اكتب ردك…",
+    "send": "إرسال",
+    "sendReply": "إرسال الرد",
+    "staff": "فريق الدعم",
+    "unknownUser": "مستخدم غير معروف",
+    "assignToMe": "تعيين لي",
+    "assignedTo": "مُعيَّن إلى",
+    "unassigned": "غير مُعيَّن",
+    "updateSuccess": "تم تحديث التذكرة",
+    "replySuccess": "تم إرسال الرد",
+    "quickReplies": "ردود سريعة",
+    "selectTemplate": "اختر قالباً…",
+    "attach": "إرفاق ملف",
+    "metaCreated": "أُنشئت {{time}}",
+    "metaUser": "المستخدم: {{name}}",
+    "metaChannel": "القناة: {{channel}}",
+    "metaCategory": "الفئة: {{category}}",
+    "channelInApp": "داخل التطبيق",
+    "categoryGeneral": "عام",
+    "quickReplyTemplates": {
+      "acknowledge": "شكراً لتواصلك. استلمنا تذكرتك وسنرد عليك قريباً.",
+      "investigating": "نحن نتحقق من المشكلة وسنُبلغك فور توفر معلومات جديدة.",
+      "resolved": "تم حل المشكلة. أخبرنا إن احتجت أي مساعدة إضافية.",
+      "followUp": "هل يمكنك تزويدنا بمزيد من التفاصيل أو لقطة شاشة للمساعدة في التحقيق؟"
+    }
+  },
+  "ticketStatus": {
+    "OPEN": "مفتوحة",
+    "IN_PROGRESS": "قيد المعالجة",
+    "WAITING_USER": "بانتظار المستخدم",
+    "RESOLVED": "محلولة",
+    "CLOSED": "مغلقة"
+  },
+  "ticketPriority": {
+    "LOW": "منخفضة",
+    "MEDIUM": "متوسطة",
+    "HIGH": "عالية",
+    "URGENT": "عاجلة"
+  }
+}

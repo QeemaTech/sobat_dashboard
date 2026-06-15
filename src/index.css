@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html.dark {
+    color-scheme: dark;
+    --sobat-bg: 11 15 46;
+    --sobat-sidebar: 17 21 53;
+    --sobat-card: 26 32 64;
+    --sobat-card-hover: 31 38 80;
+    --sobat-border: 42 47 90;
+    --sobat-text: 255 255 255;
+    --sobat-text-muted: 136 146 176;
+    --sobat-text-dim: 74 80 128;
+    --sobat-chart-grid: 42 47 90;
+    --sobat-chart-tooltip-bg: 26 32 64;
+    --sobat-chart-tooltip-text: 255 255 255;
+  }
+
+  html.light {
+    color-scheme: light;
+    --sobat-bg: 249 250 251;
+    --sobat-sidebar: 255 255 255;
+    --sobat-card: 255 255 255;
+    --sobat-card-hover: 241 245 249;
+    --sobat-border: 226 232 240;
+    --sobat-text: 15 23 42;
+    --sobat-text-muted: 100 116 139;
+    --sobat-text-dim: 148 163 184;
+    --sobat-chart-grid: 226 232 240;
+    --sobat-chart-tooltip-bg: 255 255 255;
+    --sobat-chart-tooltip-text: 15 23 42;
+  }
+
+  html:not(.light):not(.dark) {
+    color-scheme: dark;
+    --sobat-bg: 11 15 46;
+    --sobat-sidebar: 17 21 53;
+    --sobat-card: 26 32 64;
+    --sobat-card-hover: 31 38 80;
+    --sobat-border: 42 47 90;
+    --sobat-text: 255 255 255;
+    --sobat-text-muted: 136 146 176;
+    --sobat-text-dim: 74 80 128;
+    --sobat-chart-grid: 42 47 90;
+    --sobat-chart-tooltip-bg: 26 32 64;
+    --sobat-chart-tooltip-text: 255 255 255;
+  }
+
+  html {
+    @apply transition-colors duration-200 ease-in-out;
+  }
+
+  body {
+    @apply m-0 antialiased;
+    background-color: rgb(var(--sobat-bg));
+    color: rgb(var(--sobat-text));
+    font-family: 'Cairo', sans-serif;
+  }
+
+  html[lang='en'] body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  html.dark * {
+    scrollbar-color: #2a2f5a #0b0f2e;
+  }
+
+  html.light * {
+    scrollbar-color: #cbd5e1 #f9fafb;
+  }
+}
+
+@layer components {
+  .recharts-responsive-container {
+    max-width: 100% !important;
+  }
+
+  .recharts-wrapper {
+    max-width: 100% !important;
+  }
+
+  .recharts-surface {
+    overflow: visible;
+  }
+
+  [dir='rtl'] .sidebar-section-chevron {
+    transform: scaleX(-1);
+  }
+
+  .admin-data-table {
+    width: 100%;
+    table-layout: auto;
+  }
+
+  .admin-data-table .MuiTableCell-root {
+    text-align: start;
+    vertical-align: middle;
+  }
+
+  .admin-data-table .MuiTableCell-root .MuiChip-root {
+    margin-inline-end: auto;
+  }
+
+  .admin-data-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
