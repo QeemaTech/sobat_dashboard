@@ -11,8 +11,10 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        // Origin only — path /api/v1/... from the app is appended as-is
+        target: 'https://sobat.nodeteam.site',
         changeOrigin: true,
+        secure: true,
       },
     },
   },
