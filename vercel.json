@@ -11,6 +11,10 @@
   },
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "https://sobat.nodeteam.site/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

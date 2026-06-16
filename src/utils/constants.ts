@@ -1,4 +1,8 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL || '/api/v1';
+export const PRODUCTION_API_URL = 'https://sobat.nodeteam.site/api/v1';
+
+export const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD ? PRODUCTION_API_URL : '/api/v1');
 export const ADMIN_PREFIX = '/admin';
 export const STORAGE_ACCESS = 'sobat_access_token';
 export const STORAGE_REFRESH = 'sobat_refresh_token';
