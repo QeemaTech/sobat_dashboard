@@ -4,6 +4,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install --legacy-peer-deps",
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://sobat.nodeteam.site/api/v1"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
