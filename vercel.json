@@ -6,14 +6,10 @@
   "installCommand": "npm install --legacy-peer-deps",
   "build": {
     "env": {
-      "VITE_API_URL": "https://sobat.nodeteam.site/api/v1"
+      "VITE_API_URL": "https://sobat.nodeteam.site"
     }
   },
   "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://sobat.nodeteam.site/api/:path*"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
