@@ -27,10 +27,18 @@ import type { UserStatus } from '@/types';
 import { formatDate, formatDateTime, formatDurationMinutes, formatCurrency } from '@/utils/formatters';
 import { useChartStyles } from '@/utils/chartTheme';
 import { CHART_COLORS } from '@/utils/constants';
+import { useLanguage } from '@/hooks/useLanguage';
+
+function subscriptionPeriod(sub: { startDate?: string; endDate?: string | null; startsAt?: string; endsAt?: string | null }) {
+  const from = sub.startDate ?? sub.startsAt;
+  const to = sub.endDate ?? sub.endsAt;
+  return `${formatDate(from)} — ${to ? formatDate(to) : '—'}`;
+}
 
 export function UserDetailPage() {
   const { id = '' } = useParams();
   const { t } = useTranslation();
+  const { isRtl } = useLanguage();
   const { tooltipStyle, axisStyle } = useChartStyles();
   const qc = useQueryClient();
   const [tab, setTab] = useState('sleep');
@@ -261,15 +269,23 @@ export function UserDetailPage() {
 
             {tab === 'subscription' && (
               <Stack spacing={2} sx={{ mt: 2 }}>
-                {(subscriptions ?? []).map((sub) => (
-                  <Paper key={sub.id} variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-                    <Typography sx={{ fontWeight: 500 }}>{sub.plan?.nameAr ?? sub.plan?.nameEn}</Typography>
-                    <Badge label={t(`subscription.${sub.status}`)} />
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                      {formatDate(sub.startsAt)} — {sub.endsAt ? formatDate(sub.endsAt) : '—'}
-                    </Typography>
-                  </Paper>
-                ))}
+                {(subscriptions ?? []).length === 0 ? (
+                  <Typography variant="body2" color="text.secondary">
+                    {t('common.noData')}
+                  </Typography>
+                ) : (
+                  (subscriptions ?? []).map((sub) => (
+                    <Paper key={sub.id} variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
+                      <Typography sx={{ fontWeight: 500 }}>
+                        {(isRtl ? sub.plan?.nameAr : sub.plan?.nameEn) ?? sub.plan?.nameAr ?? '—'}
+                      </Typography>
+                      <Badge label={t(`subscription.${sub.status}`, sub.status)} />
+                      <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+                        {subscriptionPeriod(sub)}
+                      </Typography>
+                    </Paper>
+                  ))
+                )}
                 <DataTable
                   columns={[
                     { key: 'date', header: t('userDetail.paymentDate'), render: (r) => formatDate(r.createdAt) },
@@ -278,8 +294,16 @@ export function UserDetailPage() {
                       header: t('userDetail.amount'),
                       render: (r) => formatCurrency(Number(r.amount), r.currency),
                     },
-                    { key: 'method', header: t('userDetail.method'), render: (r) => r.method },
-                    { key: 'status', header: t('common.status'), render: (r) => <Badge label={r.status} /> },
+                    {
+                      key: 'method',
+                      header: t('userDetail.method'),
+                      render: (r) => t(`paymentMethod.${r.method}`, r.method),
+                    },
+                    {
+                      key: 'status',
+                      header: t('common.status'),
+                      render: (r) => <Badge label={t(`paymentStatus.${r.status}`, r.status)} />,
+                    },
                   ]}
                   data={payments ?? []}
                   keyExtractor={(r) => r.id}

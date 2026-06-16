@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { useTheme } from '@mui/material/styles';
 import {
   Alert,
   Box,
@@ -35,10 +36,38 @@ import { useUrlFilters } from '@/hooks/useUrlFilters';
 import { sleepService } from '@/services/sleep.service';
 import type { SyncLog } from '@/types';
 import { formatDateTime, formatRelativeTime } from '@/utils/formatters';
+import {
+  adminTableActionsSx,
+  adminTableAlign,
+  adminTableClass,
+  adminTableHeadCellSx,
+  adminTableShellSx,
+  adminTableSx,
+  adminTableWrapperClass,
+} from '@/utils/tableStyles';
 
 const DEFAULTS = { status: '', search: '' };
 const STATUS_CHIPS = ['', 'SUCCESS', 'PARTIAL', 'FAILED'] as const;
 const COL_COUNT = 6;
+
+type TableColAlign = 'start' | 'center';
+
+const SYNC_COLUMNS: { key: string; labelKey: string; width: string; align: TableColAlign }[] = [
+  { key: 'job', labelKey: 'syncLogs.colJob', width: '16%', align: 'start' },
+  { key: 'source', labelKey: 'syncLogs.colSource', width: '22%', align: 'start' },
+  { key: 'status', labelKey: 'syncLogs.colStatus', width: '12%', align: 'center' },
+  { key: 'records', labelKey: 'syncLogs.colRecords', width: '12%', align: 'center' },
+  { key: 'started', labelKey: 'syncLogs.colStarted', width: '18%', align: 'start' },
+  { key: 'actions', labelKey: 'common.actions', width: '12%', align: 'center' },
+];
+
+function headCellSx(width: string, align: TableColAlign) {
+  return { ...adminTableHeadCellSx, ...adminTableAlign[align], width };
+}
+
+function bodyCellSx(align: TableColAlign) {
+  return adminTableAlign[align];
+}
 
 function TableSkeleton() {
   return (
@@ -58,6 +87,7 @@ function TableSkeleton() {
 
 export function SyncLogsPage() {
   const { t } = useTranslation();
+  const theme = useTheme();
   const qc = useQueryClient();
   const { filters, setFilter, page, setPage } = useUrlFilters(DEFAULTS);
   const [details, setDetails] = useState<SyncLog | null>(null);
@@ -146,18 +176,21 @@ export function SyncLogsPage() {
       <TableContainer
         component={Paper}
         elevation={0}
-        sx={{ border: 1, borderColor: 'divider', borderRadius: 3, overflowX: 'auto' }}
+        className={adminTableWrapperClass}
+        sx={adminTableShellSx}
       >
-        <Table size="small" sx={{ minWidth: 880 }}>
+        <Table size="small" className={adminTableClass} dir={theme.direction} sx={{ ...adminTableSx, minWidth: 880 }}>
           <TableHead>
             <TableRow sx={{ bgcolor: 'action.hover' }}>
-              {[t('syncLogs.colJob'), t('syncLogs.colSource'), t('syncLogs.colStatus'), t('syncLogs.colRecords'), t('syncLogs.colStarted'), t('common.actions')].map(
-                (header) => (
-                  <TableCell key={header} sx={{ fontWeight: 600, color: 'text.secondary', whiteSpace: 'nowrap', py: 1.5 }}>
-                    {header}
-                  </TableCell>
-                )
-              )}
+              {SYNC_COLUMNS.map((col) => (
+                <TableCell
+                  key={col.key}
+                  className={col.align === 'center' ? 'cell-center' : col.key === 'actions' ? 'cell-actions' : undefined}
+                  sx={headCellSx(col.width, col.align)}
+                >
+                  {t(col.labelKey)}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -172,25 +205,25 @@ export function SyncLogsPage() {
             ) : (
               data.data.map((row) => (
                 <TableRow key={row.id} hover sx={{ '&:last-child td': { borderBottom: 0 } }}>
-                  <TableCell sx={{ minWidth: 120 }}>
+                  <TableCell sx={bodyCellSx('start')}>
                     <SyncJobIdCell id={row.id} onViewDetails={() => setDetails(row)} />
                   </TableCell>
-                  <TableCell sx={{ minWidth: 160 }}>
+                  <TableCell sx={bodyCellSx('start')}>
                     <SyncLogSourceCell log={row} />
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="cell-center" sx={bodyCellSx('center')}>
                     <SyncLogStatusBadge status={row.status} />
                   </TableCell>
-                  <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                  <TableCell className="cell-center" sx={{ ...bodyCellSx('center'), whiteSpace: 'nowrap' }}>
                     <Typography variant="body2">{t('syncLogs.recordsCount', { count: row.recordsCount })}</Typography>
                   </TableCell>
-                  <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                  <TableCell sx={{ ...bodyCellSx('start'), whiteSpace: 'nowrap' }}>
                     <Tooltip title={formatDateTime(row.startedAt)}>
                       <Typography variant="body2">{formatRelativeTime(row.startedAt)}</Typography>
                     </Tooltip>
                   </TableCell>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', gap: 0.5 }}>
+                  <TableCell className="cell-actions" sx={bodyCellSx('center')}>
+                    <Box sx={adminTableActionsSx}>
                       <Tooltip title={t('syncLogs.viewDetails')}>
                         <IconButton size="small" color="primary" onClick={() => setDetails(row)}>
                           <VisibilityOutlinedIcon fontSize="small" />

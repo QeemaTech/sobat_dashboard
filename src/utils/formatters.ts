@@ -16,12 +16,15 @@ export function formatNumber(n: number): string {
   return new Intl.NumberFormat(locale()).format(n);
 }
 
-export function formatDate(iso: string): string {
+export function formatDate(iso: string | null | undefined): string {
+  if (!iso) return '—';
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return '—';
   return new Intl.DateTimeFormat(locale(), {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-  }).format(new Date(iso));
+  }).format(date);
 }
 
 export function formatDateTime(iso: string): string {

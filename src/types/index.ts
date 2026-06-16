@@ -244,9 +244,15 @@ export interface Notification {
 export interface UserSubscription {
   id: string;
   status: string;
-  startsAt: string;
-  endsAt: string | null;
+  startDate: string;
+  endDate?: string | null;
+  autoRenew?: boolean;
+  cancelledAt?: string | null;
   plan?: { nameAr: string; nameEn: string };
+  /** @deprecated use startDate */
+  startsAt?: string;
+  /** @deprecated use endDate */
+  endsAt?: string | null;
 }
 
 export interface Payment {

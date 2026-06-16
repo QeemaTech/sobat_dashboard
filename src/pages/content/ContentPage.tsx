@@ -42,8 +42,52 @@ import { PageEditor } from '@/components/content/PageEditor';
 import { contentService } from '@/services/content.service';
 import type { ContentPageItem, ContentStatus, SleepTipItem } from '@/types';
 import { formatDateTime, formatRelativeTime } from '@/utils/formatters';
+import {
+  adminTableActionsSx,
+  adminTableAlign,
+  adminTableClass,
+  adminTableHeadCellSx,
+  adminTableShellSx,
+  adminTableSx,
+  adminTableTitleTextSx,
+  adminTableWrapperClass,
+  contentTextDir,
+  pickLocalizedField,
+} from '@/utils/tableStyles';
 
 const STATUS_FILTERS = ['', 'PUBLISHED', 'DRAFT', 'ARCHIVED'] as const;
+
+type TableColAlign = 'start' | 'center';
+
+function tableCellClass(align: TableColAlign, extra?: string) {
+  return [extra, align === 'center' ? 'cell-center' : ''].filter(Boolean).join(' ');
+}
+
+function headCellSx(width: string, align: TableColAlign = 'start') {
+  return { ...adminTableHeadCellSx, ...adminTableAlign[align], width };
+}
+
+function bodyCellSx(align: TableColAlign = 'start') {
+  return adminTableAlign[align];
+}
+
+const PAGE_COLUMNS: { key: string; labelKey: string; width: string; align?: TableColAlign }[] = [
+  { key: 'title', labelKey: 'content.colTitleAr', width: '30%', align: 'start' },
+  { key: 'type', labelKey: 'content.colType', width: '12%', align: 'center' },
+  { key: 'status', labelKey: 'common.status', width: '12%', align: 'center' },
+  { key: 'order', labelKey: 'content.colOrder', width: '14%', align: 'center' },
+  { key: 'updated', labelKey: 'content.colUpdated', width: '16%', align: 'start' },
+  { key: 'actions', labelKey: 'common.actions', width: '16%', align: 'center' },
+];
+
+const TIP_COLUMNS: { key: string; labelKey: string; width: string; align?: TableColAlign }[] = [
+  { key: 'title', labelKey: 'content.colTitleAr', width: '28%', align: 'start' },
+  { key: 'category', labelKey: 'content.colCategory', width: '14%', align: 'start' },
+  { key: 'status', labelKey: 'common.status', width: '12%', align: 'center' },
+  { key: 'order', labelKey: 'content.colOrder', width: '14%', align: 'center' },
+  { key: 'updated', labelKey: 'content.colUpdated', width: '16%', align: 'start' },
+  { key: 'actions', labelKey: 'common.actions', width: '16%', align: 'center' },
+];
 
 function pagePayload(p: ContentPageItem, sortOrder?: number) {
   return {
@@ -93,8 +137,10 @@ function TableSkeleton({ cols }: { cols: number }) {
 }
 
 export function ContentPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
+  const lang = i18n.language === 'en' ? 'en' : 'ar';
+  const textDir = contentTextDir(lang);
   const qc = useQueryClient();
   const [tab, setTab] = useState('pages');
   const [statusFilter, setStatusFilter] = useState('');
@@ -278,7 +324,7 @@ export function ContentPage() {
       <Paper elevation={0} sx={{ p: 2, mb: 2, border: 1, borderColor: 'divider', borderRadius: 3 }}>
         <Stack spacing={2}>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 1 }}>
-            <Typography variant="caption" color="text.secondary" sx={{ mr: 0.5 }}>
+            <Typography variant="caption" color="text.secondary" sx={{ marginInlineEnd: 0.5 }}>
               {t('common.status')}:
             </Typography>
             {STATUS_FILTERS.map((status) => (
@@ -301,7 +347,7 @@ export function ContentPage() {
                   ? t('content.rowCountPages', { count: pages.length })
                   : t('content.rowCountTips', { count: tips.length })
               }
-              sx={{ ml: 'auto' }}
+              sx={{ marginInlineStart: 'auto' }}
             />
           </Box>
 
@@ -312,7 +358,9 @@ export function ContentPage() {
             onChange={(e) => setSearch(e.target.value)}
             slotProps={{
               input: {
-                startAdornment: <SearchOutlinedIcon sx={{ fontSize: 20, color: 'text.secondary', mr: 1 }} />,
+                startAdornment: (
+                  <SearchOutlinedIcon sx={{ fontSize: 20, color: 'text.secondary', marginInlineEnd: 1 }} />
+                ),
               },
             }}
             sx={{ maxWidth: 360 }}
@@ -324,24 +372,19 @@ export function ContentPage() {
         <TableContainer
           component={Paper}
           elevation={0}
-          sx={{ border: 1, borderColor: 'divider', borderRadius: 3, overflowX: 'auto' }}
+          className={adminTableWrapperClass}
+          sx={adminTableShellSx}
         >
-          <Table size="small" sx={{ minWidth: 760, tableLayout: 'fixed', width: '100%' }}>
+          <Table size="small" className={adminTableClass} dir={theme.direction} sx={adminTableSx}>
             <TableHead>
               <TableRow sx={{ bgcolor: 'action.hover' }}>
-                {[
-                  { label: t('content.colTitleAr'), width: '30%' },
-                  { label: t('content.colType'), width: '12%' },
-                  { label: t('common.status'), width: '12%' },
-                  { label: t('content.colOrder'), width: '14%' },
-                  { label: t('content.colUpdated'), width: '16%' },
-                  { label: t('common.actions'), width: '16%' },
-                ].map((col) => (
+                {PAGE_COLUMNS.map((col) => (
                   <TableCell
-                    key={col.label}
-                    sx={{ fontWeight: 600, color: 'text.secondary', py: 1.5, width: col.width, whiteSpace: 'nowrap' }}
+                    key={col.key}
+                    className={tableCellClass(col.align ?? 'start', col.key === 'title' ? 'cell-text' : undefined)}
+                    sx={headCellSx(col.width, col.align ?? 'start')}
                   >
-                    {col.label}
+                    {t(col.labelKey)}
                   </TableCell>
                 ))}
               </TableRow>
@@ -358,18 +401,24 @@ export function ContentPage() {
               ) : (
                 pages.map((row, idx) => (
                   <TableRow key={row.id} hover sx={{ '&:last-child td': { borderBottom: 0 } }}>
-                    <TableCell sx={{ overflow: 'hidden' }}>
-                      <Typography variant="body2" sx={{ fontWeight: 700 }} dir="auto" noWrap title={row.titleAr}>
-                        {row.titleAr}
+                    <TableCell className={tableCellClass('start', 'cell-text')} sx={{ ...bodyCellSx('start'), overflow: 'hidden' }}>
+                      <Typography
+                        variant="body2"
+                        dir={textDir}
+                        noWrap
+                        title={pickLocalizedField(lang, row.titleAr, row.titleEn)}
+                        sx={adminTableTitleTextSx}
+                      >
+                        {pickLocalizedField(lang, row.titleAr, row.titleEn)}
                       </Typography>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={tableCellClass('center')} sx={bodyCellSx('center')}>
                       <ContentTypeBadge type={row.type} />
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={tableCellClass('center')} sx={bodyCellSx('center')}>
                       <ContentStatusBadge status={row.status} />
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={tableCellClass('center')} sx={bodyCellSx('center')}>
                       <ContentOrderCell
                         sortOrder={row.sortOrder}
                         canMoveUp={idx > 0}
@@ -379,13 +428,13 @@ export function ContentPage() {
                         disabled={reordering}
                       />
                     </TableCell>
-                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                    <TableCell className={tableCellClass('start')} sx={{ ...bodyCellSx('start'), whiteSpace: 'nowrap' }}>
                       <Tooltip title={formatDateTime(row.updatedAt)}>
                         <Typography variant="body2">{formatRelativeTime(row.updatedAt)}</Typography>
                       </Tooltip>
                     </TableCell>
-                    <TableCell>
-                      <Box sx={{ display: 'flex', gap: 0.5 }}>
+                    <TableCell className="cell-actions" sx={bodyCellSx('center')}>
+                      <Box sx={adminTableActionsSx}>
                         <Tooltip title={t('common.edit')}>
                           <IconButton size="small" color="primary" onClick={() => openPageEdit(row)}>
                             <EditOutlinedIcon fontSize="small" />
@@ -405,7 +454,12 @@ export function ContentPage() {
                             size="small"
                             color="error"
                             onClick={() =>
-                              setDeleteTarget({ kind: 'page', id: row.id, slug: row.slug, title: row.titleAr })
+                              setDeleteTarget({
+                                kind: 'page',
+                                id: row.id,
+                                slug: row.slug,
+                                title: pickLocalizedField(lang, row.titleAr, row.titleEn),
+                              })
                             }
                           >
                             <DeleteOutlinedIcon fontSize="small" />
@@ -423,24 +477,19 @@ export function ContentPage() {
         <TableContainer
           component={Paper}
           elevation={0}
-          sx={{ border: 1, borderColor: 'divider', borderRadius: 3, overflowX: 'auto' }}
+          className={adminTableWrapperClass}
+          sx={adminTableShellSx}
         >
-          <Table size="small" sx={{ minWidth: 760, tableLayout: 'fixed', width: '100%' }}>
+          <Table size="small" className={adminTableClass} dir={theme.direction} sx={adminTableSx}>
             <TableHead>
               <TableRow sx={{ bgcolor: 'action.hover' }}>
-                {[
-                  { label: t('content.colTitleAr'), width: '28%' },
-                  { label: t('content.colCategory'), width: '14%' },
-                  { label: t('common.status'), width: '12%' },
-                  { label: t('content.colOrder'), width: '14%' },
-                  { label: t('content.colUpdated'), width: '16%' },
-                  { label: t('common.actions'), width: '16%' },
-                ].map((col) => (
+                {TIP_COLUMNS.map((col) => (
                   <TableCell
-                    key={col.label}
-                    sx={{ fontWeight: 600, color: 'text.secondary', py: 1.5, width: col.width, whiteSpace: 'nowrap' }}
+                    key={col.key}
+                    className={tableCellClass(col.align ?? 'start', col.key === 'title' ? 'cell-text' : undefined)}
+                    sx={headCellSx(col.width, col.align ?? 'start')}
                   >
-                    {col.label}
+                    {t(col.labelKey)}
                   </TableCell>
                 ))}
               </TableRow>
@@ -457,23 +506,33 @@ export function ContentPage() {
               ) : (
                 tips.map((row, idx) => (
                   <TableRow key={row.id} hover sx={{ '&:last-child td': { borderBottom: 0 } }}>
-                    <TableCell sx={{ overflow: 'hidden' }}>
-                      <Stack direction="row" spacing={1} sx={{ minWidth: 0, alignItems: 'center' }}>
+                    <TableCell className={tableCellClass('start', 'cell-text')} sx={{ ...bodyCellSx('start'), overflow: 'hidden' }}>
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        sx={{ minWidth: 0, alignItems: 'center', justifyContent: 'flex-start', width: '100%' }}
+                      >
                         <ContentTypeBadge type="TIP" />
-                        <Typography variant="body2" sx={{ fontWeight: 700 }} dir="auto" noWrap title={row.titleAr}>
-                          {row.titleAr}
+                        <Typography
+                          variant="body2"
+                          dir={textDir}
+                          noWrap
+                          title={pickLocalizedField(lang, row.titleAr, row.titleEn)}
+                          sx={{ ...adminTableTitleTextSx, minWidth: 0, flex: 1 }}
+                        >
+                          {pickLocalizedField(lang, row.titleAr, row.titleEn)}
                         </Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell>
-                      <Typography variant="body2" color="text.secondary" dir="auto" noWrap>
+                    <TableCell className={tableCellClass('start', 'cell-text')} sx={bodyCellSx('start')}>
+                      <Typography variant="body2" color="text.secondary" dir={textDir} noWrap sx={{ textAlign: 'start', width: '100%' }}>
                         {row.category ?? '—'}
                       </Typography>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={tableCellClass('center')} sx={bodyCellSx('center')}>
                       <ContentStatusBadge status={row.status} />
                     </TableCell>
-                    <TableCell>
+                    <TableCell className={tableCellClass('center')} sx={bodyCellSx('center')}>
                       <ContentOrderCell
                         sortOrder={row.sortOrder}
                         canMoveUp={idx > 0}
@@ -483,7 +542,7 @@ export function ContentPage() {
                         disabled={reordering}
                       />
                     </TableCell>
-                    <TableCell sx={{ whiteSpace: 'nowrap' }}>
+                    <TableCell className={tableCellClass('start')} sx={{ ...bodyCellSx('start'), whiteSpace: 'nowrap' }}>
                       {row.updatedAt ? (
                         <Tooltip title={formatDateTime(row.updatedAt)}>
                           <Typography variant="body2">{formatRelativeTime(row.updatedAt)}</Typography>
@@ -492,8 +551,8 @@ export function ContentPage() {
                         '—'
                       )}
                     </TableCell>
-                    <TableCell>
-                      <Box sx={{ display: 'flex', gap: 0.5 }}>
+                    <TableCell className="cell-actions" sx={bodyCellSx('center')}>
+                      <Box sx={adminTableActionsSx}>
                         <Tooltip title={t('common.edit')}>
                           <IconButton size="small" color="primary" onClick={() => openTipEdit(row)}>
                             <EditOutlinedIcon fontSize="small" />
@@ -513,7 +572,11 @@ export function ContentPage() {
                             size="small"
                             color="error"
                             onClick={() =>
-                              setDeleteTarget({ kind: 'tip', id: row.id, title: row.titleAr })
+                              setDeleteTarget({
+                                kind: 'tip',
+                                id: row.id,
+                                title: pickLocalizedField(lang, row.titleAr, row.titleEn),
+                              })
                             }
                           >
                             <DeleteOutlinedIcon fontSize="small" />

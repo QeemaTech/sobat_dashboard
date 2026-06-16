@@ -24,6 +24,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { Activity, AlertTriangle, Calendar, Download, Trash2 } from 'lucide-react';
 import { AuditActionBadge } from '@/components/audit/AuditActionBadge';
 import { AuditDetailDrawer } from '@/components/audit/AuditDetailDrawer';
@@ -38,6 +39,14 @@ import { supervisorsService } from '@/services/supervisors.service';
 import { useUrlFilters } from '@/hooks/useUrlFilters';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 import { formatDateTime, formatNumber, formatRelativeTime } from '@/utils/formatters';
+import {
+  adminTableAlign,
+  adminTableClass,
+  adminTableHeadCellSx,
+  adminTableShellSx,
+  adminTableSx,
+  adminTableWrapperClass,
+} from '@/utils/tableStyles';
 import {
   adminPrimaryRole,
   buildSuspiciousMap,
@@ -75,6 +84,7 @@ function copyText(text: string) {
 
 export function AuditLogPage() {
   const { t } = useTranslation();
+  const theme = useTheme();
   const { filters, setFilter, resetFilters, page, setPage } = useUrlFilters(DEFAULTS);
   const [searchInput, setSearchInput] = useState(filters.search);
   const debouncedSearch = useDebouncedValue(searchInput, 350);
@@ -254,17 +264,17 @@ export function AuditLogPage() {
         </Box>
       </Paper>
 
-      <TableContainer component={Paper} elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 3 }}>
-        <Table size="small">
+      <TableContainer component={Paper} elevation={0} className={adminTableWrapperClass} sx={adminTableShellSx}>
+        <Table size="small" className={adminTableClass} dir={theme.direction} sx={adminTableSx}>
           <TableHead>
             <TableRow sx={{ bgcolor: 'action.hover' }}>
-              <TableCell>{t('audit.colDate')}</TableCell>
-              <TableCell>{t('audit.colAdmin')}</TableCell>
-              <TableCell>{t('audit.colAction')}</TableCell>
-              <TableCell>{t('audit.colModule')}</TableCell>
-              <TableCell>{t('audit.colEntity')}</TableCell>
-              <TableCell>{t('audit.colIp')}</TableCell>
-              <TableCell align="right">{t('audit.colDetails')}</TableCell>
+              <TableCell sx={{ ...adminTableHeadCellSx, ...adminTableAlign.start, width: '14%' }}>{t('audit.colDate')}</TableCell>
+              <TableCell sx={{ ...adminTableHeadCellSx, ...adminTableAlign.start, width: '18%' }}>{t('audit.colAdmin')}</TableCell>
+              <TableCell sx={{ ...adminTableHeadCellSx, ...adminTableAlign.center, width: '12%' }} className="cell-center">{t('audit.colAction')}</TableCell>
+              <TableCell sx={{ ...adminTableHeadCellSx, ...adminTableAlign.center, width: '12%' }} className="cell-center">{t('audit.colModule')}</TableCell>
+              <TableCell sx={{ ...adminTableHeadCellSx, ...adminTableAlign.start, width: '18%' }}>{t('audit.colEntity')}</TableCell>
+              <TableCell sx={{ ...adminTableHeadCellSx, ...adminTableAlign.start, width: '14%' }}>{t('audit.colIp')}</TableCell>
+              <TableCell sx={{ ...adminTableHeadCellSx, ...adminTableAlign.center, width: '12%' }} className="cell-actions">{t('audit.colDetails')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -296,14 +306,14 @@ export function AuditLogPage() {
                       '&:hover': { bgcolor: flag ? rowHighlight(flag) : 'action.hover' },
                     }}
                   >
-                    <TableCell>
+                    <TableCell sx={adminTableAlign.start}>
                       <Tooltip title={formatDateTime(row.createdAt)} arrow>
                         <Typography variant="body2" sx={{ fontWeight: 500 }}>
                           {formatRelativeTime(row.createdAt)}
                         </Typography>
                       </Tooltip>
                     </TableCell>
-                    <TableCell>
+                    <TableCell sx={adminTableAlign.start}>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         {row.admin && <UserAvatar name={row.admin.fullName} size="sm" />}
                         <Box>
@@ -318,13 +328,13 @@ export function AuditLogPage() {
                         </Box>
                       </Box>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="cell-center" sx={adminTableAlign.center}>
                       <AuditActionBadge action={row.action} module={row.module} />
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="cell-center" sx={adminTableAlign.center}>
                       <AuditModuleCell module={row.module} />
                     </TableCell>
-                    <TableCell>
+                    <TableCell sx={adminTableAlign.start}>
                       {row.entityId ? (
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                           <Typography variant="body2" sx={{ fontFamily: 'monospace', fontSize: 12 }}>
@@ -347,14 +357,14 @@ export function AuditLogPage() {
                         '—'
                       )}
                     </TableCell>
-                    <TableCell>
+                    <TableCell sx={adminTableAlign.start}>
                       <Tooltip title={ipMeta.tooltip} arrow>
                         <Typography variant="body2" sx={{ fontFamily: 'monospace', fontSize: 12 }}>
                           {ipMeta.flag} {row.ipAddress ?? '—'}
                         </Typography>
                       </Tooltip>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell className="cell-actions" sx={adminTableAlign.center}>
                       <Button size="small" variant="text" onClick={() => setDrawerEntry(row)}>
                         {t('audit.viewDetails')}
                       </Button>

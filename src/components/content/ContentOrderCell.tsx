@@ -21,7 +21,7 @@ export function ContentOrderCell({
   disabled,
 }: ContentOrderCellProps) {
   return (
-    <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.25 }}>
+    <Box sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 0.25, mx: 'auto' }}>
       <DragIndicatorIcon sx={{ fontSize: 18, color: 'text.disabled', cursor: 'grab' }} />
       <Typography variant="body2" sx={{ fontWeight: 600, minWidth: 20, textAlign: 'center' }}>
         {sortOrder}

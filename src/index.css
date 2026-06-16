@@ -91,7 +91,12 @@
 
   .admin-data-table {
     width: 100%;
-    table-layout: auto;
+    table-layout: fixed;
+  }
+
+  .admin-data-table .MuiTableCell-root.cell-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .admin-data-table .MuiTableCell-root {
@@ -99,8 +104,17 @@
     vertical-align: middle;
   }
 
-  .admin-data-table .MuiTableCell-root .MuiChip-root {
-    margin-inline-end: auto;
+  .admin-data-table .MuiTableCell-root.cell-center {
+    text-align: center;
+  }
+
+  .admin-data-table .MuiTableCell-root.cell-center .MuiChip-root,
+  .admin-data-table .MuiTableCell-root.cell-center .MuiBox-root {
+    margin-inline: auto;
+  }
+
+  .admin-data-table .MuiTableCell-root.cell-actions {
+    text-align: center;
   }
 
   .admin-data-table-wrapper {
