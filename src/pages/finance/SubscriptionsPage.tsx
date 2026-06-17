@@ -13,6 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { ExportCsvButton } from '@/components/ui/ExportCsvButton';
 import { StatCard } from '@/components/ui/StatCard';
 import { DataTable } from '@/components/ui/DataTable';
 import { Badge } from '@/components/ui/Badge';
@@ -23,7 +24,7 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { FilterPanel } from '@/components/ui/FilterPanel';
 import { financeService } from '@/services/finance.service';
 import { useUrlFilters } from '@/hooks/useUrlFilters';
-import { formatDate, formatCurrency, formatDateTime } from '@/utils/formatters';
+import { formatDate, formatCurrency, formatDateTime, exportCsv } from '@/utils/formatters';
 import type { SubscriptionListItem } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -77,6 +78,32 @@ export function SubscriptionsPage() {
     return rows;
   }, [data?.data, filters.dateFrom, filters.dateTo]);
 
+  function handleExport() {
+    exportCsv(
+      'subscriptions.csv',
+      [
+        t('subscriptions.colUser'),
+        t('common.email'),
+        t('subscriptions.colPlan'),
+        t('common.status'),
+        t('subscriptions.colStart'),
+        t('subscriptions.colEnd'),
+        t('subscriptions.colAutoRenew'),
+        t('subscriptions.colCancelled'),
+      ],
+      filtered.map((r) => [
+        r.user?.fullName ?? '',
+        r.user?.email ?? '',
+        (isRtl ? r.plan?.nameAr : r.plan?.nameEn) ?? '',
+        t(`subscriptionStatus.${r.status}`, r.status),
+        formatDate(r.startDate),
+        r.endDate ? formatDate(r.endDate) : '',
+        r.autoRenew ? t('common.yes') : t('common.no'),
+        r.cancelledAt ? formatDate(r.cancelledAt) : '',
+      ])
+    );
+  }
+
   const columns = [
     {
       key: 'user',
@@ -123,7 +150,10 @@ export function SubscriptionsPage() {
 
   return (
     <Box>
-      <PageHeader title={t('finance.subscriptionsTitle')} />
+      <PageHeader
+        title={t('finance.subscriptionsTitle')}
+        actions={<ExportCsvButton onClick={handleExport} disabled={!filtered.length} />}
+      />
 
       <Box
         sx={{

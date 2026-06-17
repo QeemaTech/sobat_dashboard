@@ -14,7 +14,6 @@ import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import HotelRoundedIcon from '@mui/icons-material/HotelRounded';
 import MonitorHeartRoundedIcon from '@mui/icons-material/MonitorHeartRounded';
 import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
-import SecurityRoundedIcon from '@mui/icons-material/SecurityRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
 import SyncRoundedIcon from '@mui/icons-material/SyncRounded';
@@ -46,7 +45,6 @@ export const NAV_SECTIONS: NavSection[] = [
     items: [
       { to: '/admin/users', labelKey: 'nav.users', icon: GroupRoundedIcon },
       { to: '/admin/supervisors', labelKey: 'nav.supervisors', icon: AdminPanelSettingsRoundedIcon },
-      { to: '/admin/roles', labelKey: 'nav.roles', icon: SecurityRoundedIcon },
       { to: '/admin/permissions', labelKey: 'nav.permissions', icon: VerifiedUserRoundedIcon },
     ],
   },

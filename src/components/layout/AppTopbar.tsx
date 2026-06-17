@@ -4,13 +4,11 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import {
   AppBar,
   Avatar,
-  Badge,
   Box,
   IconButton,
   InputAdornment,
@@ -25,6 +23,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import { TopbarNotificationsMenu } from '@/components/layout/TopbarNotificationsMenu';
 import { useAuth } from '@/hooks/useAuth';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { tokens } from '@/theme/tokens';
@@ -139,13 +138,7 @@ export function AppTopbar({ onMenuClick }: AppTopbarProps) {
             </IconButton>
           </Tooltip>
 
-          <Tooltip title={t('nav.notifications')}>
-            <IconButton size="small">
-              <Badge variant="dot" color="error" overlap="circular">
-                <NotificationsNoneRoundedIcon />
-              </Badge>
-            </IconButton>
-          </Tooltip>
+          <TopbarNotificationsMenu />
 
           <IconButton onClick={(e) => setMenuAnchor(e.currentTarget)} sx={{ p: 0.5 }}>
             <Avatar sx={{ width: 36, height: 36, bgcolor: 'primary.main', fontSize: '0.875rem' }}>

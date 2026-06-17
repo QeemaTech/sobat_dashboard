@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import DownloadIcon from '@mui/icons-material/Download';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
@@ -30,6 +29,7 @@ import {
   Typography,
 } from '@mui/material';
 import { Pagination } from '@/components/ui/Pagination';
+import { ExportCsvButton } from '@/components/ui/ExportCsvButton';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { useUrlFilters } from '@/hooks/useUrlFilters';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
@@ -135,9 +135,7 @@ export function UsersPage() {
           {data?.meta?.total != null && (
             <Chip label={data.meta.total} color="primary" variant="outlined" size="small" />
           )}
-          <Button variant="outlined" startIcon={<DownloadIcon />} onClick={handleExport} size="small">
-            {t('users.exportCsv')}
-          </Button>
+          <ExportCsvButton onClick={handleExport} disabled={!users.length} />
         </Stack>
       </Stack>
 

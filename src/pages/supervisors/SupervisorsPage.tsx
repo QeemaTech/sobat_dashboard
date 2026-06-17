@@ -19,6 +19,7 @@ import {
   Typography,
 } from '@mui/material';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { ExportCsvButton } from '@/components/ui/ExportCsvButton';
 import { DataTable } from '@/components/ui/DataTable';
 import { Badge } from '@/components/ui/Badge';
 import { Modal } from '@/components/ui/Modal';
@@ -26,7 +27,7 @@ import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { supervisorsService, type SupervisorStatus } from '@/services/supervisors.service';
 import { rolesService } from '@/services/roles.service';
 import type { Supervisor } from '@/types';
-import { formatDateTime } from '@/utils/formatters';
+import { formatDateTime, exportCsv } from '@/utils/formatters';
 
 type SupervisorsQueryData = Awaited<ReturnType<typeof supervisorsService.list>>;
 
@@ -145,6 +146,26 @@ export function SupervisorsPage() {
     setStatusTarget({ id: supervisor.id, nextStatus });
   }
 
+  function handleExport() {
+    exportCsv(
+      'supervisors.csv',
+      [
+        t('common.name'),
+        t('common.email'),
+        t('supervisors.colRoles'),
+        t('supervisors.colLastLogin'),
+        t('supervisors.colStatus'),
+      ],
+      (data?.data ?? []).map((r) => [
+        r.fullName,
+        r.email,
+        r.roles?.map((role) => role.nameAr || role.name).join(' | ') ?? '',
+        r.lastLoginAt ? formatDateTime(r.lastLoginAt) : '',
+        t(`status.${r.status}`, r.status),
+      ])
+    );
+  }
+
   const columns = [
     { key: 'name', header: t('common.name'), render: (r: Supervisor) => r.fullName },
     { key: 'email', header: t('common.email'), render: (r: Supervisor) => r.email },
@@ -218,9 +239,12 @@ export function SupervisorsPage() {
       <PageHeader
         title={t('supervisors.title')}
         actions={
-          <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
-            {t('supervisors.addSupervisor')}
-          </Button>
+          <Stack direction="row" spacing={1}>
+            <ExportCsvButton onClick={handleExport} disabled={!(data?.data?.length)} />
+            <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
+              {t('supervisors.addSupervisor')}
+            </Button>
+          </Stack>
         }
       />
       <DataTable columns={columns} data={data?.data ?? []} loading={isLoading} keyExtractor={(r) => r.id} />

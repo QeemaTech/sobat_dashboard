@@ -38,10 +38,27 @@ const COPY = {
 } as const;
 
 const fieldClass =
-  'peer h-12 w-full rounded-lg border border-[#e0e0e0] bg-[#f0f0f8] px-3 pt-4 pb-1 text-sm text-[#111827] outline-none transition-colors focus:border-[#4338CA] focus:bg-[#f5f5fc] dark:border-sobat-border dark:bg-[#1a2048] dark:text-sobat-text dark:focus:border-[#6366F1] dark:focus:bg-[#1e2654]';
+  'h-12 w-full rounded-lg border border-[#e0e0e0] bg-[#f0f0f8] px-3 text-sm text-[#111827] outline-none transition-colors focus:border-[#4338CA] focus:bg-[#f5f5fc] dark:border-sobat-border dark:bg-[#1a2048] dark:text-sobat-text dark:focus:border-[#6366F1] dark:focus:bg-[#1e2654]';
 
-const labelClass =
-  'pointer-events-none absolute top-3.5 text-sm text-[#6b7280] transition-all peer-focus:top-1 peer-focus:text-xs peer-focus:text-[#4338CA] peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs dark:text-sobat-text-muted dark:peer-focus:text-[#818CF8]';
+const labelBaseClass =
+  'pointer-events-none absolute transition-all duration-150 text-[#6b7280] dark:text-sobat-text-muted';
+
+function fieldLabelClass(active: boolean, isRtl: boolean) {
+  return [
+    labelBaseClass,
+    isRtl ? 'right-3' : 'left-3',
+    active ? 'top-1 text-xs text-[#4338CA] dark:text-[#818CF8]' : 'top-3.5 text-sm',
+  ].join(' ');
+}
+
+function fieldInputClass(isRtl: boolean, active: boolean, extra = '') {
+  return [
+    fieldClass,
+    active ? 'pb-1 pt-5' : 'py-3',
+    isRtl ? 'text-right' : 'text-left',
+    extra,
+  ].join(' ');
+}
 
 function LanguageToggle({ lang, onChange }: { lang: Lang; onChange: (lang: Lang) => void }) {
   return (
@@ -83,11 +100,15 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState(() => getRememberedEmail() || 'admin@sabat.app');
   const [password, setPassword] = useState('');
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
   const t = COPY[lang];
   const isRtl = lang === 'ar';
+  const emailLabelActive = email.length > 0 || emailFocused;
+  const passwordLabelActive = password.length > 0 || passwordFocused;
 
   if (!loading && isAuthenticated) {
     return <Navigate to={from} replace />;
@@ -147,10 +168,11 @@ export default function LoginPage() {
                 autoComplete="username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder=" "
-                className={`${fieldClass} ${isRtl ? 'text-right' : 'text-left'}`}
+                onFocus={() => setEmailFocused(true)}
+                onBlur={() => setEmailFocused(false)}
+                className={fieldInputClass(isRtl, emailLabelActive)}
               />
-              <label htmlFor="email" className={`${labelClass} ${isRtl ? 'right-3' : 'left-3'}`}>
+              <label htmlFor="email" className={fieldLabelClass(emailLabelActive, isRtl)}>
                 {t.email}
               </label>
             </div>
@@ -174,8 +196,9 @@ export default function LoginPage() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder=" "
-                className={`${fieldClass} ${isRtl ? 'pl-10 text-right' : 'pr-10 text-left'}`}
+                onFocus={() => setPasswordFocused(true)}
+                onBlur={() => setPasswordFocused(false)}
+                className={fieldInputClass(isRtl, passwordLabelActive, isRtl ? 'pl-10' : 'pr-10')}
               />
 
               {!isRtl && (
@@ -189,7 +212,7 @@ export default function LoginPage() {
                 </button>
               )}
 
-              <label htmlFor="password" className={`${labelClass} ${isRtl ? 'right-3' : 'left-3'}`}>
+              <label htmlFor="password" className={fieldLabelClass(passwordLabelActive, isRtl)}>
                 {t.password}
               </label>
             </div>

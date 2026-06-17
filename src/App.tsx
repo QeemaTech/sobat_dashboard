@@ -7,7 +7,6 @@ import { DashboardPage } from '@/pages/dashboard/DashboardPage';
 import { UsersPage } from '@/pages/users/UsersPage';
 import { UserDetailPage } from '@/pages/users/UserDetailPage';
 import { SupervisorsPage } from '@/pages/supervisors/SupervisorsPage';
-import { RolesPage } from '@/pages/roles/RolesPage';
 import { PermissionsMatrixPage } from '@/pages/roles/PermissionsMatrixPage';
 import { SleepFilesPage } from '@/pages/sleep/SleepFilesPage';
 import { SleepLogsPage } from '@/pages/sleep/SleepLogsPage';
@@ -62,7 +61,7 @@ export default function App() {
         <Route path="users" element={<UsersPage />} />
         <Route path="users/:id" element={<UserDetailPage />} />
         <Route path="supervisors" element={<SupervisorsPage />} />
-        <Route path="roles" element={<RolesPage />} />
+        <Route path="roles" element={<Navigate to="/admin/permissions" replace />} />
         <Route path="permissions" element={<PermissionsMatrixPage />} />
         <Route path="sleep-files" element={<SleepFilesPage />} />
         <Route path="sleep-logs" element={<SleepLogsPage />} />

@@ -60,7 +60,15 @@
     "englishLabel": "ENGLISH",
     "pageTitle": "لوحة المشرف",
     "unauthorized": "غير مصرح",
-    "retry": "إعادة المحاولة"
+    "retry": "إعادة المحاولة",
+    "exportCsv": "تصدير CSV"
+  },
+  "topbar": {
+    "notifications": "الإشعارات",
+    "noNotifications": "لا توجد إشعارات جديدة",
+    "unreadCount": "{{count}} تحتاج متابعة",
+    "viewAllSupport": "عرض كل التذاكر",
+    "viewNotificationsLog": "سجل الإشعارات"
   },
   "theme": {
     "dark": "الوضع الداكن",
@@ -272,6 +280,20 @@
   "permissions": {
     "title": "مصفوفة الصلاحيات",
     "role": "الدور",
+    "roleName": "اسم الدور",
+    "newRoleName": "اسم الدور الجديد",
+    "deleteRole": "حذف الدور",
+    "system": "نظام",
+    "noRoleSelected": "اختر دوراً لعرض صلاحياته",
+    "columns": {
+      "module": "الوحدة",
+      "create": "إنشاء",
+      "delete": "حذف",
+      "edit": "تعديل",
+      "view": "عرض",
+      "manage": "إدارة",
+      "send": "إرسال"
+    },
     "modules": {
       "users": "المستخدمون",
       "admins": "المشرفون",
@@ -305,7 +327,11 @@
       "super_admin": "مشرف أعلى",
       "support_manager": "مدير الدعم",
       "content_manager": "مدير المحتوى"
-    }
+    },
+    "saveChanges": "حفظ التغييرات",
+    "allSaved": "تم حفظ جميع التغييرات",
+    "unsavedChanges": "{{count}} أدوار بها تغييرات غير محفوظة",
+    "systemRole": "دور نظام — الصلاحيات غير قابلة للتعديل"
   },
   "sleep": {
     "filesTitle": "ملفات النوم",
@@ -663,6 +689,7 @@
     "descEn": "الوصف بالإنجليزية",
     "price": "السعر",
     "currency": "العملة",
+    "billingCycle": "دورة الفوترة",
     "trialDays": "{{n}} يوم تجريبي",
     "trialDaysLabel": "أيام التجربة",
     "features": "الميزات",
@@ -946,6 +973,7 @@
     "emptySearch": "لا توجد تذاكر مطابقة للبحث.",
     "searchPlaceholder": "بحث في التذاكر…",
     "ticketCount": "{{count}} تذكرة",
+    "colSubject": "الموضوع",
     "sortBy": "ترتيب حسب",
     "sortNewest": "الأحدث",
     "sortOldest": "الأقدم",

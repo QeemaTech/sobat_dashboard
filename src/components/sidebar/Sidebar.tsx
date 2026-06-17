@@ -53,7 +53,6 @@ export function Sidebar({ collapsed, mobile, open, onClose }: SidebarProps) {
         <SidebarSection title={t('nav.identity')} collapsed={collapsed}>
           <SidebarItem to="/admin/users" label={t('nav.users')} collapsed={collapsed} />
           <SidebarItem to="/admin/supervisors" label={t('nav.supervisors')} collapsed={collapsed} />
-          <SidebarItem to="/admin/roles" label={t('nav.roles')} collapsed={collapsed} />
           <SidebarItem to="/admin/permissions" label={t('nav.permissions')} collapsed={collapsed} />
         </SidebarSection>
         <SidebarSection title={t('nav.product')} collapsed={collapsed}>

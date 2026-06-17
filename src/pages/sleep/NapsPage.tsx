@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { ExportCsvButton } from '@/components/ui/ExportCsvButton';
 import { DataTable } from '@/components/ui/DataTable';
 import { Badge } from '@/components/ui/Badge';
 import { Pagination } from '@/components/ui/Pagination';
@@ -11,7 +12,7 @@ import { SleepFilterBar, type SleepFilters } from '@/components/sleep/SleepFilte
 import { useUrlFilters } from '@/hooks/useUrlFilters';
 import { sleepService } from '@/services/sleep.service';
 import type { NapRecord } from '@/types';
-import { formatDateTime, formatDurationMinutes } from '@/utils/formatters';
+import { formatDateTime, formatDurationMinutes, exportCsv } from '@/utils/formatters';
 
 const DEFAULTS: SleepFilters = { userId: '', dateFrom: '', dateTo: '', type: '', zone: '', source: '' };
 
@@ -56,9 +57,36 @@ export function NapsPage() {
     { key: 'created', header: t('sleepLogs.col.created'), render: (r: NapRecord) => formatDateTime(r.createdAt) },
   ];
 
+  function handleExport() {
+    exportCsv(
+      'naps.csv',
+      [
+        t('common.name'),
+        t('naps.colStart'),
+        t('naps.colEnd'),
+        t('naps.colDuration'),
+        t('filters.source'),
+        t('naps.colNotes'),
+        t('sleepLogs.col.created'),
+      ],
+      (data?.data ?? []).map((r) => [
+        r.user?.fullName ?? r.userId,
+        formatDateTime(r.napStart),
+        formatDateTime(r.napEnd),
+        formatDurationMinutes(r.durationMinutes),
+        r.source,
+        r.notes ?? '',
+        formatDateTime(r.createdAt),
+      ])
+    );
+  }
+
   return (
     <Box>
-      <PageHeader title={t('sleep.napsTitle')} />
+      <PageHeader
+        title={t('sleep.napsTitle')}
+        actions={<ExportCsvButton onClick={handleExport} disabled={!(data?.data?.length)} />}
+      />
       <SleepFilterBar filters={filters} onChange={setFilters} onReset={resetFilters} showSourceFilter />
       <DataTable columns={columns} data={data?.data ?? []} loading={isLoading} keyExtractor={(r) => r.id} />
       {data?.meta && <Pagination page={page} totalPages={data.meta.totalPages} onPageChange={setPage} />}

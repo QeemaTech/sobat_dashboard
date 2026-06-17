@@ -18,13 +18,14 @@ import {
   Typography,
 } from '@mui/material';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { ExportCsvButton } from '@/components/ui/ExportCsvButton';
 import { Modal } from '@/components/ui/Modal';
 import { Badge } from '@/components/ui/Badge';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { ThemedCard } from '@/components/ui/ThemedCard';
 import { financeService } from '@/services/finance.service';
-import { formatCurrency } from '@/utils/formatters';
+import { formatCurrency, exportCsv } from '@/utils/formatters';
 import type { BillingCycle, Plan } from '@/types';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -133,6 +134,30 @@ export function PlansPage() {
     setOpen(true);
   }
 
+  function handleExport() {
+    exportCsv(
+      'plans.csv',
+      [
+        t('plans.nameAr'),
+        t('plans.nameEn'),
+        t('plans.price'),
+        t('plans.currency'),
+        t('plans.billingCycle'),
+        t('plans.trialDaysLabel'),
+        t('plans.active'),
+      ],
+      plans.map((plan) => [
+        plan.nameAr,
+        plan.nameEn,
+        String(plan.price),
+        plan.currency,
+        t(`plans.billing.${plan.billingCycle}`),
+        String(plan.trialDays),
+        plan.isActive ? t('common.yes') : t('common.no'),
+      ])
+    );
+  }
+
   if (isLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
@@ -146,9 +171,12 @@ export function PlansPage() {
       <PageHeader
         title={t('finance.plansTitle')}
         actions={
-          <Button variant="contained" startIcon={<Plus size={16} />} onClick={openCreate}>
-            {t('plans.add')}
-          </Button>
+          <Stack direction="row" spacing={1}>
+            <ExportCsvButton onClick={handleExport} disabled={!plans.length} />
+            <Button variant="contained" startIcon={<Plus size={16} />} onClick={openCreate}>
+              {t('plans.add')}
+            </Button>
+          </Stack>
         }
       />
 

@@ -7,6 +7,7 @@ import {
   Chip,
   Link,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +17,7 @@ import {
   Typography,
 } from '@mui/material';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { ExportCsvButton } from '@/components/ui/ExportCsvButton';
 import { Badge } from '@/components/ui/Badge';
 import { Pagination } from '@/components/ui/Pagination';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
@@ -23,7 +25,7 @@ import { SleepFilterBar, type SleepFilters } from '@/components/sleep/SleepFilte
 import { useUrlFilters } from '@/hooks/useUrlFilters';
 import { sleepService } from '@/services/sleep.service';
 import type { SessionType, SleepLog } from '@/types';
-import { formatDateTime, formatDurationMinutes } from '@/utils/formatters';
+import { formatDateTime, formatDurationMinutes, exportCsv } from '@/utils/formatters';
 
 const DEFAULTS: SleepFilters = { userId: '', dateFrom: '', dateTo: '', type: '', zone: '', source: '' };
 
@@ -53,14 +55,34 @@ export function SleepLogsPage() {
     queryFn: () => sleepService.sleepLogs(params),
   });
 
+  function handleExport() {
+    exportCsv(
+      'sleep-logs.csv',
+      COL_KEYS.map((k) => t(`sleepLogs.col.${k}`)),
+      (data?.data ?? []).map((row) => [
+        row.user?.fullName ?? row.userId,
+        t(`session.${row.sessionType as SessionType}`),
+        formatDateTime(row.sleepStart),
+        formatDateTime(row.sleepEnd),
+        formatDurationMinutes(row.durationMinutes),
+        row.source,
+        row.quality ?? '',
+        formatDateTime(row.createdAt),
+      ])
+    );
+  }
+
   return (
     <Box>
       <PageHeader
         title={t('sleep.logsTitle')}
         actions={
-          data?.meta?.total != null ? (
-            <Chip label={data.meta.total} color="primary" variant="outlined" size="small" />
-          ) : undefined
+          <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+            {data?.meta?.total != null && (
+              <Chip label={data.meta.total} color="primary" variant="outlined" size="small" />
+            )}
+            <ExportCsvButton onClick={handleExport} disabled={!(data?.data?.length)} />
+          </Stack>
         }
       />
       <SleepFilterBar filters={filters} onChange={setFilters} onReset={resetFilters} showTypeFilter showZoneFilter showSourceFilter />

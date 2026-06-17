@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
@@ -12,6 +13,7 @@ import {
 } from '@mui/material';
 import { TicketDetailPanel } from '@/components/support/TicketDetailPanel';
 import { TicketListCard } from '@/components/support/TicketListCard';
+import { ExportCsvButton } from '@/components/ui/ExportCsvButton';
 import { TICKET_STATUS_STYLE } from '@/components/support/TicketStatusBadge';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { Select } from '@/components/ui/Select';
@@ -20,12 +22,14 @@ import { useAuthStore } from '@/store/authStore';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 import type { SupportTicket, TicketPriority, TicketStatus } from '@/types';
 import { compareByPriority } from '@/utils/supportUtils';
+import { formatDateTime, exportCsv } from '@/utils/formatters';
 
 const STATUS_TABS: TicketStatus[] = ['OPEN', 'IN_PROGRESS', 'WAITING_USER', 'RESOLVED', 'CLOSED'];
 type SortKey = 'newest' | 'oldest' | 'priority' | 'updated';
 
 export function SupportPage() {
   const { t } = useTranslation();
+  const location = useLocation();
   const qc = useQueryClient();
   const currentAdmin = useAuthStore((s) => s.admin);
   const [statusTab, setStatusTab] = useState<TicketStatus | ''>('');
@@ -71,6 +75,11 @@ export function SupportPage() {
   });
 
   const allTickets = data?.data ?? [];
+
+  useEffect(() => {
+    const ticketId = (location.state as { ticketId?: string } | null)?.ticketId;
+    if (ticketId) setSelectedId(ticketId);
+  }, [location.state]);
 
   const statusCounts = useMemo(() => {
     const counts: Record<string, number> = { '': allTickets.length };
@@ -123,6 +132,28 @@ export function SupportPage() {
 
   const assignedName = selectedId ? assignedMap[selectedId] ?? (detail?.status === 'IN_PROGRESS' ? currentAdmin?.fullName ?? null : null) : null;
 
+  function handleExport() {
+    exportCsv(
+      'support-tickets.csv',
+      [
+        t('support.colSubject'),
+        t('common.name'),
+        t('common.email'),
+        t('common.status'),
+        t('support.priority'),
+        t('common.registeredAt'),
+      ],
+      filtered.map((tk) => [
+        tk.subject,
+        tk.user?.fullName ?? t('support.unknownUser'),
+        tk.user?.email ?? '',
+        t(`ticketStatus.${tk.status}`, tk.status),
+        t(`ticketPriority.${tk.priority}`, tk.priority),
+        formatDateTime(tk.createdAt),
+      ])
+    );
+  }
+
   return (
     <Box>
       <Paper
@@ -150,11 +181,13 @@ export function SupportPage() {
           }}
         >
           <Box sx={{ px: 2, pt: 2, pb: 1.5, borderBottom: 1, borderColor: 'divider' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5, flexWrap: 'wrap' }}>
               <Typography variant="h6" sx={{ fontWeight: 700 }}>
                 {t('support.title')}
               </Typography>
               <Chip size="small" label={t('support.ticketCount', { count: allTickets.length })} sx={{ fontWeight: 600 }} />
+              <Box sx={{ flex: 1 }} />
+              <ExportCsvButton onClick={handleExport} disabled={!filtered.length} />
             </Box>
 
             <Box

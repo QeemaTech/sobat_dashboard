@@ -192,20 +192,24 @@ export function TicketDetailPanel({
 
       <Box sx={{ p: 2, borderTop: 1, borderColor: 'divider', bgcolor: 'background.paper' }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 1.5 }}>
-          <FormControl size="small" sx={{ minWidth: 180 }}>
-            <InputLabel>{t('support.quickReplies')}</InputLabel>
+          <FormControl size="small" sx={{ minWidth: 200 }}>
             <Select
-              label={t('support.quickReplies')}
               value=""
               displayEmpty
+              renderValue={() => (
+                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.5 }}>
+                  {t('support.selectTemplate')}
+                </Typography>
+              )}
               onChange={(e) => {
                 const key = e.target.value as (typeof QUICK_REPLY_KEYS)[number];
                 if (key) onReplyChange(t(`support.quickReplyTemplates.${key}`));
               }}
+              sx={{
+                borderRadius: 2,
+                '& .MuiSelect-select': { py: 1 },
+              }}
             >
-              <MenuItem value="" disabled>
-                {t('support.selectTemplate')}
-              </MenuItem>
               {QUICK_REPLY_KEYS.map((k) => (
                 <MenuItem key={k} value={k}>
                   {t(`support.quickReplyTemplates.${k}`)}

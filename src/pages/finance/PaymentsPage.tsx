@@ -6,6 +6,7 @@ import { DollarSign, Calendar, User, RotateCcw } from 'lucide-react';
 import { Box, Button, Link, TableCell, TableRow, TextField } from '@mui/material';
 import { PaymentMethodBadge } from '@/components/finance/PaymentMethodBadge';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { ExportCsvButton } from '@/components/ui/ExportCsvButton';
 import { StatCard } from '@/components/ui/StatCard';
 import { DataTable } from '@/components/ui/DataTable';
 import { Badge } from '@/components/ui/Badge';
@@ -16,7 +17,7 @@ import { FilterPanel } from '@/components/ui/FilterPanel';
 import { financeService } from '@/services/finance.service';
 import { useUrlFilters } from '@/hooks/useUrlFilters';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
-import { formatCurrency, formatDateTime } from '@/utils/formatters';
+import { formatCurrency, formatDateTime, exportCsv } from '@/utils/formatters';
 import type { PaymentListItem } from '@/types';
 
 const DEFAULTS = { status: '', method: '', dateFrom: '', dateTo: '', userSearch: '' };
@@ -73,6 +74,32 @@ export function PaymentsPage() {
 
   const pageTotal = filtered.reduce((sum, p) => sum + (p.status === 'COMPLETED' ? Number(p.amount) : 0), 0);
   const currency = filtered[0]?.currency ?? 'SAR';
+
+  function handleExport() {
+    exportCsv(
+      'payments.csv',
+      [
+        t('payments.colRef'),
+        t('filters.user'),
+        t('common.email'),
+        t('payments.colAmount'),
+        t('payments.colCurrency'),
+        t('payments.colMethod'),
+        t('common.status'),
+        t('payments.colPaidAt'),
+      ],
+      filtered.map((p) => [
+        p.providerRef ?? p.id,
+        p.user?.fullName ?? '',
+        p.user?.email ?? '',
+        String(p.amount),
+        p.currency,
+        p.method ? t(`paymentMethod.${p.method}`, p.method) : '',
+        t(`paymentStatus.${p.status}`, p.status),
+        formatDateTime(p.paidAt ?? p.createdAt),
+      ])
+    );
+  }
 
   const columns = [
     {
@@ -141,7 +168,10 @@ export function PaymentsPage() {
 
   return (
     <Box>
-      <PageHeader title={t('finance.paymentsTitle')} />
+      <PageHeader
+        title={t('finance.paymentsTitle')}
+        actions={<ExportCsvButton onClick={handleExport} disabled={!filtered.length} />}
+      />
 
       <Box
         sx={{
