@@ -37,28 +37,17 @@ const COPY = {
   },
 } as const;
 
-const fieldClass =
-  'h-12 w-full rounded-lg border border-[#e0e0e0] bg-[#f0f0f8] px-3 text-sm text-[#111827] outline-none transition-colors focus:border-[#4338CA] focus:bg-[#f5f5fc] dark:border-sobat-border dark:bg-[#1a2048] dark:text-sobat-text dark:focus:border-[#6366F1] dark:focus:bg-[#1e2654]';
-
-const labelBaseClass =
-  'pointer-events-none absolute transition-all duration-150 text-[#6b7280] dark:text-sobat-text-muted';
-
-function fieldLabelClass(active: boolean, isRtl: boolean) {
-  return [
-    labelBaseClass,
-    isRtl ? 'right-3' : 'left-3',
-    active ? 'top-1 text-xs text-[#4338CA] dark:text-[#818CF8]' : 'top-3.5 text-sm',
-  ].join(' ');
-}
-
-function fieldInputClass(isRtl: boolean, active: boolean, extra = '') {
-  return [
-    fieldClass,
-    active ? 'pb-1 pt-5' : 'py-3',
+const inputClass = (isRtl: boolean, extra = '') =>
+  [
+    'h-12 w-full rounded-lg border border-[#e0e0e0] bg-[#f0f0f8] px-3 py-3 text-sm text-[#111827] outline-none transition-colors',
+    'focus:border-[#4338CA] focus:bg-[#f5f5fc]',
+    'dark:border-sobat-border dark:bg-[#1a2048] dark:text-sobat-text dark:focus:border-[#6366F1] dark:focus:bg-[#1e2654]',
     isRtl ? 'text-right' : 'text-left',
     extra,
   ].join(' ');
-}
+
+const staticLabelClass =
+  'mb-1.5 block text-sm font-medium text-[#374151] dark:text-sobat-text-muted';
 
 function LanguageToggle({ lang, onChange }: { lang: Lang; onChange: (lang: Lang) => void }) {
   return (
@@ -100,15 +89,11 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState(() => getRememberedEmail() || 'admin@sabat.app');
   const [password, setPassword] = useState('');
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
   const t = COPY[lang];
   const isRtl = lang === 'ar';
-  const emailLabelActive = email.length > 0 || emailFocused;
-  const passwordLabelActive = password.length > 0 || passwordFocused;
 
   if (!loading && isAuthenticated) {
     return <Navigate to={from} replace />;
@@ -160,7 +145,10 @@ export default function LoginPage() {
             dir={isRtl ? 'rtl' : 'ltr'}
             className={`space-y-5 ${isRtl ? 'text-right' : 'text-left'}`}
           >
-            <div className="relative">
+            <div>
+              <label htmlFor="email" className={staticLabelClass}>
+                {t.email}
+              </label>
               <input
                 id="email"
                 type="email"
@@ -168,53 +156,47 @@ export default function LoginPage() {
                 autoComplete="username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                onFocus={() => setEmailFocused(true)}
-                onBlur={() => setEmailFocused(false)}
-                className={fieldInputClass(isRtl, emailLabelActive)}
+                className={inputClass(isRtl)}
               />
-              <label htmlFor="email" className={fieldLabelClass(emailLabelActive, isRtl)}>
-                {t.email}
-              </label>
             </div>
 
-            <div className="relative">
-              {isRtl && (
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((v) => !v)}
-                  aria-label={showPassword ? t.hidePassword : t.showPassword}
-                  className="absolute left-3 top-1/2 z-10 -translate-y-1/2 text-[#6b7280] transition-colors hover:text-[#4338CA] dark:text-sobat-text-muted dark:hover:text-[#818CF8]"
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
-              )}
-
-              <input
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                required
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onFocus={() => setPasswordFocused(true)}
-                onBlur={() => setPasswordFocused(false)}
-                className={fieldInputClass(isRtl, passwordLabelActive, isRtl ? 'pl-10' : 'pr-10')}
-              />
-
-              {!isRtl && (
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((v) => !v)}
-                  aria-label={showPassword ? t.hidePassword : t.showPassword}
-                  className="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-[#6b7280] transition-colors hover:text-[#4338CA] dark:text-sobat-text-muted dark:hover:text-[#818CF8]"
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
-              )}
-
-              <label htmlFor="password" className={fieldLabelClass(passwordLabelActive, isRtl)}>
+            <div>
+              <label htmlFor="password" className={staticLabelClass}>
                 {t.password}
               </label>
+              <div className="relative">
+                {isRtl && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    aria-label={showPassword ? t.hidePassword : t.showPassword}
+                    className="absolute left-3 top-1/2 z-10 -translate-y-1/2 text-[#6b7280] transition-colors hover:text-[#4338CA] dark:text-sobat-text-muted dark:hover:text-[#818CF8]"
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                )}
+
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className={inputClass(isRtl, isRtl ? 'pl-10' : 'pr-10')}
+                />
+
+                {!isRtl && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    aria-label={showPassword ? t.hidePassword : t.showPassword}
+                    className="absolute right-3 top-1/2 z-10 -translate-y-1/2 text-[#6b7280] transition-colors hover:text-[#4338CA] dark:text-sobat-text-muted dark:hover:text-[#818CF8]"
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                )}
+              </div>
             </div>
 
             <label
