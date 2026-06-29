@@ -54,6 +54,10 @@ export function TicketListCard({ ticket, selected, onSelect, onAssignToMe }: Tic
         </Box>
       </Box>
 
+      <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 0.5 }}>
+        {t(`support.category.${ticket.category}`, { defaultValue: ticket.category })}
+      </Typography>
+
       <Typography
         variant="body2"
         sx={{

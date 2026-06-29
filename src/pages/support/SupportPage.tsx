@@ -20,11 +20,16 @@ import { Select } from '@/components/ui/Select';
 import { supportService } from '@/services/support.service';
 import { useAuthStore } from '@/store/authStore';
 import { useDebouncedValue } from '@/hooks/useDebouncedValue';
-import type { SupportTicket, TicketPriority, TicketStatus } from '@/types';
+import type { SupportTicket, SupportTicketCategory, TicketPriority, TicketStatus } from '@/types';
 import { compareByPriority } from '@/utils/supportUtils';
 import { formatDateTime, exportCsv } from '@/utils/formatters';
 
 const STATUS_TABS: TicketStatus[] = ['OPEN', 'IN_PROGRESS', 'WAITING_USER', 'RESOLVED', 'CLOSED'];
+const CATEGORY_OPTIONS: SupportTicketCategory[] = [
+  'TECHNICAL_ISSUE',
+  'FEATURE_SUGGESTION',
+  'GENERAL_FEEDBACK',
+];
 type SortKey = 'newest' | 'oldest' | 'priority' | 'updated';
 
 export function SupportPage() {
@@ -33,6 +38,7 @@ export function SupportPage() {
   const qc = useQueryClient();
   const currentAdmin = useAuthStore((s) => s.admin);
   const [statusTab, setStatusTab] = useState<TicketStatus | ''>('');
+  const [categoryFilter, setCategoryFilter] = useState<SupportTicketCategory | ''>('');
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebouncedValue(search, 300);
   const [sortBy, setSortBy] = useState<SortKey>('newest');
@@ -88,9 +94,19 @@ export function SupportPage() {
     return counts;
   }, [allTickets]);
 
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { '': allTickets.length };
+    for (const category of CATEGORY_OPTIONS) counts[category] = 0;
+    for (const tk of allTickets) {
+      if (tk.category) counts[tk.category] = (counts[tk.category] ?? 0) + 1;
+    }
+    return counts;
+  }, [allTickets]);
+
   const filtered = useMemo(() => {
     let rows = [...allTickets];
     if (statusTab) rows = rows.filter((tk) => tk.status === statusTab);
+    if (categoryFilter) rows = rows.filter((tk) => tk.category === categoryFilter);
     const q = debouncedSearch.trim().toLowerCase();
     if (q) {
       rows = rows.filter(
@@ -109,7 +125,7 @@ export function SupportPage() {
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
     return rows;
-  }, [allTickets, statusTab, debouncedSearch, sortBy]);
+  }, [allTickets, statusTab, categoryFilter, debouncedSearch, sortBy]);
 
   const assignToMe = useCallback(
     (ticket: SupportTicket) => {
@@ -140,6 +156,7 @@ export function SupportPage() {
         t('common.name'),
         t('common.email'),
         t('common.status'),
+        t('support.colCategory'),
         t('support.priority'),
         t('common.registeredAt'),
       ],
@@ -148,6 +165,7 @@ export function SupportPage() {
         tk.user?.fullName ?? t('support.unknownUser'),
         tk.user?.email ?? '',
         t(`ticketStatus.${tk.status}`, tk.status),
+        t(`support.category.${tk.category}`, { defaultValue: tk.category ?? '—' }),
         t(`ticketPriority.${tk.priority}`, tk.priority),
         formatDateTime(tk.createdAt),
       ])
@@ -216,6 +234,33 @@ export function SupportPage() {
                   color={TICKET_STATUS_STYLE[s].color}
                   bg={TICKET_STATUS_STYLE[s].bg}
                   border={TICKET_STATUS_STYLE[s].border}
+                />
+              ))}
+            </Box>
+
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 0.75,
+                overflowX: 'auto',
+                pb: 0.5,
+                flexWrap: 'nowrap',
+                '&::-webkit-scrollbar': { height: 4 },
+              }}
+            >
+              <FilterChip
+                label={t('support.filterAllCategories')}
+                count={categoryCounts['']}
+                active={categoryFilter === ''}
+                onClick={() => setCategoryFilter('')}
+              />
+              {CATEGORY_OPTIONS.map((category) => (
+                <FilterChip
+                  key={category}
+                  label={t(`support.category.${category}`, category)}
+                  count={categoryCounts[category] ?? 0}
+                  active={categoryFilter === category}
+                  onClick={() => setCategoryFilter(category)}
                 />
               ))}
             </Box>

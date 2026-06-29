@@ -177,10 +177,17 @@ export interface SleepDebtRow {
   actualMinutes: number;
   debtMinutes: number;
   cumulativeDebt: number;
+  weightedDebtMinutes?: number;
+  weightedDebtFormatted?: string;
   zone?: SleepZone | null;
   trendMinutes?: number;
   user?: { id: string; fullName: string; email: string };
 }
+
+export type SupportTicketCategory =
+  | 'TECHNICAL_ISSUE'
+  | 'FEATURE_SUGGESTION'
+  | 'GENERAL_FEEDBACK';
 
 export interface HealthSource {
   id: string;
@@ -400,6 +407,7 @@ export interface AppSetting {
 
 export interface SupportTicket {
   id: string;
+  category: SupportTicketCategory;
   subject: string;
   message: string;
   status: TicketStatus;

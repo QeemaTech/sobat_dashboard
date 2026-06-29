@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
-import { Alert, Box, Button, Chip, Link } from '@mui/material';
+import { Alert, Box, Button, Chip, Link, Typography } from '@mui/material';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { DataTable } from '@/components/ui/DataTable';
 import { Pagination } from '@/components/ui/Pagination';
@@ -15,7 +15,7 @@ import { SleepFilterBar, type SleepFilters } from '@/components/sleep/SleepFilte
 import { useUrlFilters } from '@/hooks/useUrlFilters';
 import { sleepService } from '@/services/sleep.service';
 import type { SleepDebtRow } from '@/types';
-import { formatDate, formatDurationMinutes } from '@/utils/formatters';
+import { formatDate, formatDebtHHMM } from '@/utils/formatters';
 
 const DEFAULTS: SleepFilters = { userId: '', dateFrom: '', dateTo: '', type: '', zone: '', source: '' };
 const PAGE_SIZE = 20;
@@ -27,7 +27,15 @@ interface UserDebtRow {
   userId: string;
   user?: SleepDebtRow['user'];
   latest: SleepDebtRow;
-  debtHistoryHours: number[];
+  debtHistoryMinutes: number[];
+}
+
+function resolveWeightedFormatted(row: SleepDebtRow): string {
+  return row.weightedDebtFormatted ?? formatDebtHHMM(row.cumulativeDebt ?? 0);
+}
+
+function resolveWeightedMinutes(row: SleepDebtRow): number {
+  return row.weightedDebtMinutes ?? row.cumulativeDebt ?? 0;
 }
 
 function groupByUser(rows: SleepDebtRow[]): UserDebtRow[] {
@@ -46,10 +54,10 @@ function groupByUser(rows: SleepDebtRow[]): UserDebtRow[] {
         userId,
         user: sorted[0].user,
         latest: sorted[0],
-        debtHistoryHours: last7.map((r) => Math.max(0, Number(r.debtMinutes) || 0) / 60),
+        debtHistoryMinutes: last7.map((r) => resolveWeightedMinutes(r)),
       };
     })
-    .sort((a, b) => a.latest.cumulativeDebt - b.latest.cumulativeDebt);
+    .sort((a, b) => resolveWeightedMinutes(b.latest) - resolveWeightedMinutes(a.latest));
 }
 
 async function fetchAllSleepDebt(params: Record<string, string | number | undefined>) {
@@ -66,6 +74,13 @@ async function fetchAllSleepDebt(params: Record<string, string | number | undefi
     data: rest.reduce((rows, page) => rows.concat(page.data), first.data),
     meta: first.meta,
   };
+}
+
+function formatTrend(minutes: number | undefined, t: (key: string) => string): string {
+  if (!minutes) return '—';
+  if (minutes > 0) return `${t('sleepDebt.trendDown')} (${minutes} ${t('common.minutes')})`;
+  if (minutes < 0) return `${t('sleepDebt.trendUp')} (${Math.abs(minutes)} ${t('common.minutes')})`;
+  return t('sleepDebt.trendStable');
 }
 
 export function SleepDebtPage() {
@@ -107,30 +122,41 @@ export function SleepDebtPage() {
         ),
     },
     { key: 'date', header: t('sleepDebt.colDate'), render: (r: UserDebtRow) => formatDate(r.latest.date) },
-    { key: 'target', header: t('sleepDebt.colTarget'), render: (r: UserDebtRow) => formatDurationMinutes(r.latest.targetMinutes) },
-    { key: 'actual', header: t('sleepDebt.colActual'), render: (r: UserDebtRow) => formatDurationMinutes(r.latest.actualMinutes) },
-    { key: 'debt', header: t('sleepDebt.colDebt'), render: (r: UserDebtRow) => formatDurationMinutes(r.latest.debtMinutes) },
     {
-      key: 'cum',
-      header: t('sleepDebt.colCumulative'),
-      render: (r: UserDebtRow) => formatDurationMinutes(r.latest.cumulativeDebt),
+      key: 'weighted',
+      header: t('sleepDebt.colWeightedDebt'),
+      render: (r: UserDebtRow) => (
+        <Box>
+          <Typography variant="body2" fontWeight={600}>
+            {resolveWeightedFormatted(r.latest)}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            {resolveWeightedMinutes(r.latest)} {t('common.minutes')}
+          </Typography>
+        </Box>
+      ),
     },
     {
       key: 'zone',
       header: t('sleepDebt.colSleepZone'),
       className: 'sleep-debt-zone-col',
       render: (r: UserDebtRow) => (
-        <SleepDebtCumulativeBadge cumulativeMinutes={Number(r.latest.cumulativeDebt) || 0} />
+        <SleepDebtCumulativeBadge cumulativeMinutes={resolveWeightedMinutes(r.latest)} />
       ),
     },
     {
       key: 'trend',
       header: t('sleepDebt.colTrend'),
       className: 'sleep-debt-trend-col',
-      render: (r: UserDebtRow) => {
-        const zone = cumulativeDebtZone(Number(r.latest.cumulativeDebt) || 0);
-        return <DebtSparkline data={r.debtHistoryHours} zone={zone} />;
-      },
+      render: (r: UserDebtRow) => (
+        <Box>
+          <Typography variant="body2">{formatTrend(r.latest.trendMinutes, t)}</Typography>
+          <DebtSparkline
+            data={r.debtHistoryMinutes.map((m) => m / 60)}
+            zone={cumulativeDebtZone(resolveWeightedMinutes(r.latest))}
+          />
+        </Box>
+      ),
     },
   ];
 

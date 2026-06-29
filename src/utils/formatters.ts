@@ -45,6 +45,22 @@ export function formatSleepHours(hours: number, unitLabel: string): string {
   return `${hours.toFixed(1)} ${unitLabel}`;
 }
 
+export function formatDebtHHMM(totalMinutes: number): string {
+  const value = Math.max(0, Math.round(totalMinutes));
+  const hours = Math.floor(value / 60);
+  let minutes = value % 60;
+
+  if (minutes > 0 && minutes % 10 === 0) {
+    const tens = Math.floor(minutes / 10);
+    minutes = tens % 2 === 1 ? tens * 10 + 4 : (tens - 1) * 10 + 5;
+  }
+
+  const rounded = hours * 60 + minutes;
+  const roundedHours = Math.floor(rounded / 60);
+  const roundedMinutes = rounded % 60;
+  return `${roundedHours}:${String(roundedMinutes).padStart(2, '0')}`;
+}
+
 export function formatDurationMinutes(totalMinutes: number, minuteLabel?: string): string {
   const h = Math.floor(totalMinutes / 60);
   const m = totalMinutes % 60;

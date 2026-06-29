@@ -168,7 +168,11 @@ export function TicketDetailPanel({
             />
           )}
           <Chip size="small" label={t('support.metaChannel', { channel: t('support.channelInApp') })} variant="outlined" />
-          <Chip size="small" label={t('support.metaCategory', { category: t('support.categoryGeneral') })} variant="outlined" />
+          <Chip
+            size="small"
+            label={t(`support.category.${detail.category}`, { defaultValue: detail.category })}
+            variant="outlined"
+          />
         </Box>
       </Box>
 

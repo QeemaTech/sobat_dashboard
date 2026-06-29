@@ -24,7 +24,7 @@ import { ThemedCard } from '@/components/ui/ThemedCard';
 import { usersService } from '@/services/users.service';
 import { useBreadcrumbStore } from '@/store/breadcrumbStore';
 import type { UserStatus } from '@/types';
-import { formatDate, formatDateTime, formatDurationMinutes, formatCurrency } from '@/utils/formatters';
+import { formatDate, formatDateTime, formatDurationMinutes, formatCurrency, formatDebtHHMM } from '@/utils/formatters';
 import { useChartStyles } from '@/utils/chartTheme';
 import { CHART_COLORS } from '@/utils/constants';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -80,7 +80,7 @@ export function UserDetailPage() {
 
   const sleepChart = (recentSleepDebt ?? []).map((d) => ({
     date: formatDate(d.date),
-    hours: Math.round((d.actualMinutes / 60) * 10) / 10,
+    hours: Math.round(((d.weightedDebtMinutes ?? d.cumulativeDebt ?? 0) / 60) * 10) / 10,
   }));
 
   const tabs = [
@@ -246,7 +246,10 @@ export function UserDetailPage() {
                         {t('userDetail.debtRemaining')}
                       </Typography>
                       <Typography variant="h5" color="error" sx={{ fontWeight: 700 }}>
-                        {todaySleep ? formatDurationMinutes(Math.max(0, todaySleep.debtMinutes)) : '—'}
+                        {todaySleep
+                          ? todaySleep.weightedDebtFormatted ??
+                            formatDebtHHMM(todaySleep.cumulativeDebt ?? 0)
+                          : '—'}
                       </Typography>
                     </Paper>
                   </Grid>
