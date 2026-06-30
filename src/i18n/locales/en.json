@@ -18,6 +18,7 @@
     "reminders": "Reminders",
     "customNotifications": "Custom notifications",
     "notifications": "Notifications",
+    "onboarding": "Onboarding",
     "finance": "Finance & Content",
     "plans": "Plans",
     "subscriptions": "Subscriptions",
@@ -59,6 +60,8 @@
     "retry": "Retry",
     "yes": "Yes",
     "no": "No",
+    "active": "Active",
+    "inactive": "Inactive",
     "view": "View",
     "phone": "Phone",
     "exportCsv": "Export CSV"
@@ -973,6 +976,35 @@
       "investigating": "We are looking into this issue and will update you as soon as we have more information.",
       "resolved": "This issue has been resolved. Please let us know if you need anything else.",
       "followUp": "Could you provide more details or a screenshot to help us investigate further?"
+    }
+  },
+  "onboarding": {
+    "title": "Onboarding",
+    "pageSubtitle": "Manage onboarding questions and the segmented sleep feature.",
+    "addQuestion": "New question",
+    "editQuestion": "Edit question",
+    "colKey": "Key",
+    "colQuestion": "Question",
+    "colType": "Type",
+    "colOrder": "Order",
+    "colRequired": "Required",
+    "questionAr": "Question (Arabic)",
+    "questionEn": "Question (English)",
+    "optionsTitle": "Answer options",
+    "addOption": "Add option",
+    "noOptions": "No options yet.",
+    "optionValue": "Value",
+    "optionLabelAr": "Label (Arabic)",
+    "optionLabelEn": "Label (English)",
+    "segmentedSleepTitle": "Segmented sleep (Fajr wake)",
+    "segmentedSleepHint": "When enabled, users see a system question: continuous sleep vs waking for Fajr.",
+    "systemQuestion": "System question",
+    "emptyTitle": "No questions",
+    "emptyDesc": "Add your first onboarding question.",
+    "types": {
+      "single_choice": "Single choice",
+      "multi_choice": "Multiple choice",
+      "time": "Time"
     }
   },
   "ticketStatus": {

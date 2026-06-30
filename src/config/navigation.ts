@@ -14,6 +14,7 @@ import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
 import HotelRoundedIcon from '@mui/icons-material/HotelRounded';
 import MonitorHeartRoundedIcon from '@mui/icons-material/MonitorHeartRounded';
 import PaymentsRoundedIcon from '@mui/icons-material/PaymentsRounded';
+import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
 import SyncRoundedIcon from '@mui/icons-material/SyncRounded';
@@ -61,6 +62,7 @@ export const NAV_SECTIONS: NavSection[] = [
       { to: '/admin/reminders', labelKey: 'nav.reminders', icon: AlarmRoundedIcon },
       { to: '/admin/custom-notifications', labelKey: 'nav.customNotifications', icon: EditNotificationsRoundedIcon },
       { to: '/admin/notifications', labelKey: 'nav.notifications', icon: CampaignRoundedIcon },
+      { to: '/admin/onboarding', labelKey: 'nav.onboarding', icon: QuizRoundedIcon },
     ],
   },
   {

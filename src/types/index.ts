@@ -454,3 +454,32 @@ export interface AuditLogStats {
   deletes: number;
   exports: number;
 }
+
+export type OnboardingQuestionType = 'single_choice' | 'multi_choice' | 'time';
+
+export interface OnboardingOption {
+  id: string;
+  questionId: string;
+  value: string;
+  labelAr: string;
+  labelEn?: string | null;
+  sortOrder: number;
+  isActive: boolean;
+}
+
+export interface OnboardingQuestion {
+  id: string;
+  key: string;
+  questionAr: string;
+  questionEn?: string | null;
+  type: OnboardingQuestionType | string;
+  sortOrder: number;
+  isActive: boolean;
+  isRequired: boolean;
+  options: OnboardingOption[];
+}
+
+export interface OnboardingAdminConfig {
+  segmentedSleepEnabled: boolean;
+  sleepSystemQuestion: OnboardingQuestion | null;
+}

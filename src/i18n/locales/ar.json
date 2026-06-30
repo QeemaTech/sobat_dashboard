@@ -18,6 +18,7 @@
     "reminders": "التذكيرات",
     "customNotifications": "التنبيهات المخصصة",
     "notifications": "الإشعارات",
+    "onboarding": "التأهيل",
     "finance": "المالية والمحتوى",
     "plans": "الخطط",
     "subscriptions": "الاشتراكات",
@@ -54,6 +55,8 @@
     "confirm": "تأكيد",
     "yes": "نعم",
     "no": "لا",
+    "active": "نشط",
+    "inactive": "غير نشط",
     "language": "اللغة",
     "arabic": "عربي",
     "english": "English",
@@ -1017,6 +1020,35 @@
       "investigating": "نحن نتحقق من المشكلة وسنُبلغك فور توفر معلومات جديدة.",
       "resolved": "تم حل المشكلة. أخبرنا إن احتجت أي مساعدة إضافية.",
       "followUp": "هل يمكنك تزويدنا بمزيد من التفاصيل أو لقطة شاشة للمساعدة في التحقيق؟"
+    }
+  },
+  "onboarding": {
+    "title": "التأهيل",
+    "pageSubtitle": "إدارة أسئلة التأهيل وميزة النوم المجزئ.",
+    "addQuestion": "سؤال جديد",
+    "editQuestion": "تعديل السؤال",
+    "colKey": "المفتاح",
+    "colQuestion": "السؤال",
+    "colType": "النوع",
+    "colOrder": "الترتيب",
+    "colRequired": "مطلوب",
+    "questionAr": "السؤال (عربي)",
+    "questionEn": "السؤال (إنجليزي)",
+    "optionsTitle": "خيارات الإجابة",
+    "addOption": "إضافة خيار",
+    "noOptions": "لا توجد خيارات بعد.",
+    "optionValue": "القيمة",
+    "optionLabelAr": "التسمية (عربي)",
+    "optionLabelEn": "التسمية (إنجليزي)",
+    "segmentedSleepTitle": "نظام النوم المجزئ (استيقاظ الفجر)",
+    "segmentedSleepHint": "عند التفعيل يظهر للمستخدم سؤال نظامي: نوم متواصل مقابل الاستيقاظ للفجر.",
+    "systemQuestion": "سؤال نظامي",
+    "emptyTitle": "لا توجد أسئلة",
+    "emptyDesc": "أضف أول سؤال تأهيل.",
+    "types": {
+      "single_choice": "اختيار واحد",
+      "multi_choice": "اختيار متعدد",
+      "time": "وقت"
     }
   },
   "ticketStatus": {

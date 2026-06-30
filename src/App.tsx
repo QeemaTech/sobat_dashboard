@@ -21,6 +21,7 @@ import { PlansPage } from '@/pages/finance/PlansPage';
 import { SubscriptionsPage } from '@/pages/finance/SubscriptionsPage';
 import { PaymentsPage } from '@/pages/finance/PaymentsPage';
 import { ContentPage } from '@/pages/content/ContentPage';
+import { OnboardingPage } from '@/pages/onboarding/OnboardingPage';
 import { SettingsPage } from '@/pages/content/SettingsPage';
 import { SupportPage } from '@/pages/support/SupportPage';
 import { AuditLogPage } from '@/pages/support/AuditLogPage';
@@ -76,6 +77,7 @@ export default function App() {
         <Route path="subscriptions" element={<SubscriptionsPage />} />
         <Route path="payments" element={<PaymentsPage />} />
         <Route path="content" element={<ContentPage />} />
+        <Route path="onboarding" element={<OnboardingPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="support" element={<SupportPage />} />
         <Route path="audit-log" element={<AuditLogPage />} />
